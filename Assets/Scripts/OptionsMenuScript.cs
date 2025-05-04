@@ -4,9 +4,15 @@ using UnityEngine.Audio;
 public class OptionsMenuScript : MonoBehaviour
 {
 
-    public AudioMixer audioMixer;
-    public void SetVolume(float volume)
+    public AudioMixer musicMixer;
+    public AudioMixer FXMixer;
+
+    public void SetMusicVolume(float volume)
     {
-        audioMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+        musicMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
+    }
+    public void SetSoundFXVolume(float volume)
+    {
+        FXMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
     }
 }
