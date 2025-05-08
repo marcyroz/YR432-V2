@@ -3,20 +3,26 @@ using UnityEngine.EventSystems;
 
 public class UIToggle : MonoBehaviour
 {
-    [Header("O que será ativado/desativado")]
+    [Header("Painel a ser ativado/desativado")]
     [SerializeField] GameObject targetPanel;
 
-    [Header("Referencia opcional ao botão que controla o toggle")]
+    [Header("Botão controlador (opcional)")]
     [SerializeField] GameObject toggleButton;
 
     private bool isOpen = false;
 
+    void Awake()
+    {
+        // Se não for definido no inspetor, assume o próprio botão
+        if (toggleButton == null)
+            toggleButton = this.gameObject;
+    }
+
     void Update()
     {
-        // Verifica clique fora quando está aberto
+        // Fecha se clicar fora
         if (isOpen && Input.GetMouseButtonDown(0))
         {
-            // Se o clique NÃO foi no painel e NÃO foi no botão, fecha
             if (!IsPointerOverGameObject(targetPanel) && !IsPointerOverGameObject(toggleButton))
             {
                 TogglePanel(false);
@@ -39,7 +45,6 @@ public class UIToggle : MonoBehaviour
     {
         if (go == null) return false;
 
-        // Cria um retângulo da área do objeto na tela
         RectTransform rectTransform = go.GetComponent<RectTransform>();
         if (rectTransform == null) return false;
 

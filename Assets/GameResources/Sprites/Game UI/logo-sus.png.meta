@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 1bf936b1e0cb537489e5fb196e5f7b63
+guid: 82b46a93b7147aa41a89657a212af54d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4483504832982471387
-    second: pixil-frame-0 (1)_0
+      213: -5915013734365415051
+    second: sus-sistema-unico-de-saude (1)_0
+  - first:
+      213: -3921198367905925448
+    second: sus-sistema-unico-de-saude (1)_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pixil-frame-0 (1)_0
+      name: sus-sistema-unico-de-saude (1)_0
       rect:
         serializedVersion: 2
-        x: 193
-        y: 47
-        width: 12
-        height: 8
+        x: 0
+        y: 149
+        width: 352
+        height: 164
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bd2daa614eb983e30800000000000000
-      internalID: 4483504832982471387
+      spriteID: 579b7910956a9eda0800000000000000
+      internalID: -5915013734365415051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sus-sistema-unico-de-saude (1)_1
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 0
+        width: 463
+        height: 462
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b6302b1cda1599c0800000000000000
+      internalID: -3921198367905925448
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pixil-frame-0 (1)_0: 4483504832982471387
+      sus-sistema-unico-de-saude (1)_0: -5915013734365415051
+      sus-sistema-unico-de-saude (1)_1: -3921198367905925448
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
