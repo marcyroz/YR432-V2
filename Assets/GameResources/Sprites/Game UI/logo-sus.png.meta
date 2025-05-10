@@ -1,16 +1,13 @@
 fileFormatVersion: 2
-guid: edb0cbe6e3884b740bdbd36edfba43c1
+guid: 82b46a93b7147aa41a89657a212af54d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2827053017402458895
-    second: scene_6_0
+      213: -5915013734365415051
+    second: sus-sistema-unico-de-saude (1)_0
   - first:
-      213: 2390586351709878423
-    second: scene_6_1
-  - first:
-      213: 3454015095201779369
-    second: scene_6_2
+      213: -3921198367905925448
+    second: sus-sistema-unico-de-saude (1)_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -119,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: scene_6_0
+      name: sus-sistema-unico-de-saude (1)_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 129
-        width: 392
-        height: 322
+        x: 0
+        y: 149
+        width: 352
+        height: 164
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f03487fadb5bb3720800000000000000
-      internalID: 2827053017402458895
+      spriteID: 579b7910956a9eda0800000000000000
+      internalID: -5915013734365415051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: scene_6_1
+      name: sus-sistema-unico-de-saude (1)_1
       rect:
         serializedVersion: 2
-        x: 429
-        y: 329
-        width: 17
-        height: 17
+        x: 379
+        y: 0
+        width: 463
+        height: 462
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,30 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 798709afe911d2120800000000000000
-      internalID: 2390586351709878423
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: scene_6_2
-      rect:
-        serializedVersion: 2
-        x: 439
-        y: 129
-        width: 292
-        height: 322
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9aec65ecd602fef20800000000000000
-      internalID: 3454015095201779369
+      spriteID: 8b6302b1cda1599c0800000000000000
+      internalID: -3921198367905925448
       vertices: []
       indices: 
       edges: []
@@ -188,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -198,9 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      scene_6_0: 2827053017402458895
-      scene_6_1: 2390586351709878423
-      scene_6_2: 3454015095201779369
+      sus-sistema-unico-de-saude (1)_0: -5915013734365415051
+      sus-sistema-unico-de-saude (1)_1: -3921198367905925448
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

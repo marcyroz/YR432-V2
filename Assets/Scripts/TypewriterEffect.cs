@@ -10,10 +10,11 @@ public class TypewriterEffect : MonoBehaviour
     [SerializeField] float timeBtwWords = 0.5f;
     [SerializeField] GameObject arrowIndicator;
     [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip[] typingSounds; // Agora são vários sons!
+    [SerializeField] AudioClip[] typingSounds;
     [SerializeField] float minPitch = 0.95f;
     [SerializeField] float maxPitch = 1.05f;
-    [SerializeField] float minSoundInterval = 0.03f; // intervalo mínimo entre sons
+    [SerializeField] float minSoundInterval = 0.03f;
+    [SerializeField] GameObject dialogWindow;
 
     private float lastSoundTime = 0f;
     public string[] stringArray;
@@ -25,11 +26,14 @@ public class TypewriterEffect : MonoBehaviour
     void Start()
     {
         arrowIndicator.SetActive(false);
-        NextLine();
+        // Não chamamos NextLine aqui mais. A janela será ativada externamente via ActivateDialog
+        dialogWindow.SetActive(false); // Começa desativada
     }
 
     void Update()
     {
+        if (!dialogWindow.activeSelf) return;
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isTyping)
@@ -44,6 +48,26 @@ public class TypewriterEffect : MonoBehaviour
         }
     }
 
+    [SerializeField] float delayBeforeStart = 0.5f; // tempo de espera antes de exibir o diálogo
+
+    public void ActivateDialog()
+    {
+        StartCoroutine(ShowDialogAfterDelay());
+    }
+
+    private IEnumerator ShowDialogAfterDelay()
+    {
+        yield return new WaitForSeconds(delayBeforeStart);
+
+        index = -1;
+        dialogWindow.SetActive(true);
+        arrowIndicator.SetActive(false);
+        NextLine();
+
+        Debug.Log("Mostrando diálogo...");
+    }
+
+
     void NextLine()
     {
         index++;
@@ -56,6 +80,7 @@ public class TypewriterEffect : MonoBehaviour
         {
             Debug.Log("Fim das falas, Mestre Marcelly.");
             arrowIndicator.SetActive(false);
+            dialogWindow.SetActive(false); // 💥 Aqui desativa a janela ao fim
         }
     }
 
@@ -78,7 +103,9 @@ public class TypewriterEffect : MonoBehaviour
 
             if (typingSounds.Length > 0 && audioSource && counter <= totalVisibleCharacters)
             {
-                if (Time.time - lastSoundTime >= minSoundInterval)
+                char currentChar = _textMeshPro.text[Mathf.Clamp(counter - 1, 0, _textMeshPro.text.Length - 1)];
+
+                if (char.IsLetterOrDigit(currentChar) && (Time.time - lastSoundTime >= minSoundInterval))
                 {
                     AudioClip clip = typingSounds[Random.Range(0, typingSounds.Length)];
                     audioSource.pitch = Random.Range(minPitch, maxPitch);
