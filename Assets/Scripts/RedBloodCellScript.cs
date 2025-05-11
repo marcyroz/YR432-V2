@@ -1,16 +1,12 @@
 using UnityEngine;
 
-public class RedBloodCellScript : MonoBehaviour
+public class RedBloodCellScript : CellScript
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+    // public bool isInfected;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    // protected override void Start()
+    // {
+    //     base.Start(); // importa os valores do CellData
+    //     // pode fazer lógica adicional aqui, como checar infecção etc.
+    // }
 }

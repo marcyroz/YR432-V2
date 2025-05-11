@@ -1,16 +1,20 @@
 using UnityEngine;
 
-public class WhiteBloodCellScript : MonoBehaviour
+public class WhiteBloodCellScript : CellScript
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    // public int strength;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // protected override void Start()
+    // {
+    //     base.Start();
+
+    //     // if (cellData is WhiteBloodCellData wbcData)
+    //     // {
+    //     //     strength = wbcData.strength;
+    //     // }
+    //     // else
+    //     // {
+    //     //     Debug.LogWarning("CellData não é do tipo WhiteBloodCellData!");
+    //     // }
+    // }
 }

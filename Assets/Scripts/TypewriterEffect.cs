@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine.Events;
 using UnityEngine;
 using TMPro;
 
@@ -22,6 +23,8 @@ public class TypewriterEffect : MonoBehaviour
     private bool isTyping = false;
     private bool accelerate = false;
     private Coroutine typingCoroutine;
+    public UnityEvent OnDialogFinished;
+
 
     void Start()
     {
@@ -81,6 +84,8 @@ public class TypewriterEffect : MonoBehaviour
             Debug.Log("Fim das falas, Mestre Marcelly.");
             arrowIndicator.SetActive(false);
             dialogWindow.SetActive(false); // 💥 Aqui desativa a janela ao fim
+
+            OnDialogFinished?.Invoke(); // ✨ Evento disparado aqui!
         }
     }
 
