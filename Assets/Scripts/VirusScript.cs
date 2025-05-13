@@ -1,16 +1,15 @@
 using UnityEngine;
 
-public class VirusScript : MonoBehaviour
+public class VirusScript : CellScript
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //por enquanto deixar isso pra poder ser alterado em runtime. as outras propriedades vão ser adicionadas dps
+    // public int strenght;
+    // protected override void Start()
+    // {
+    //     base.Start(); // importa os valores do CellData
+    //     // pode fazer lógica adicional aqui, como checar infecção etc.
+    // }
 }
+
+
