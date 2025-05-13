@@ -3,6 +3,7 @@ using UnityEngine;
 public class CellScript : MonoBehaviour
 {
     public CellData cellData;
+    public static CountBoardScript countBoard; // 🔗 Referência estática
 
     [HideInInspector] public int health;
     [HideInInspector] public int resistance;
@@ -18,15 +19,24 @@ public class CellScript : MonoBehaviour
         velocity = data.velocity;
     }
 
-    // Não precisamos mais do Start
-    // protected virtual void Start() { ... }
+    void OnEnable()
+    {
+        if (countBoard != null && cellData != null)
+            countBoard.addEntity(cellData.entityType);
+    }
+
+    void OnDisable()
+    {
+        if (countBoard != null && cellData != null)
+            countBoard.removeEntity(cellData.entityType);
+    }
 
     public void TakeDamage(int damage)
     {
         health -= damage;
         if (health <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false); // Desativa (devolve à pool)
         }
     }
 

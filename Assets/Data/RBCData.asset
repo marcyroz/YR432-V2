@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda9d78fd2ea5f6438fad214d7f243dd, type: 3}
   m_Name: RBCData
   m_EditorClassIdentifier: 
+  entityType: RBC
   health: 18
   resistance: 6
   reproductionRate: 10
