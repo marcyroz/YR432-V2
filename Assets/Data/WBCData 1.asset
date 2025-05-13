@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9956245bef500479df487d5f05ee1d, type: 3}
   m_Name: WBCData 1
   m_EditorClassIdentifier: 
+  entityType: WBC
   health: 12
   resistance: 15
   reproductionRate: 8

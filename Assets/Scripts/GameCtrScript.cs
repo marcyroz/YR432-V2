@@ -6,13 +6,12 @@ public class GameCtrScript : MonoBehaviour
     [SerializeField] private AudioClip clickAudioClip;
     [SerializeField] private GameOverScreen gameOverScreen;
     [SerializeField] private MusicManager musicManager;
-
     [SerializeField] private CellSpawnerScript cellSpawner; // 🎯 Referência ao spawner
 
     void Start()
     {
+        CellScript.countBoard = Object.FindFirstObjectByType<CountBoardScript>();
         typewriter.OnDialogFinished.AddListener(OnDialogComplete);
-
         typewriter.ActivateDialog(); // Inicia o diálogo
                                      // cellSpawner.StartSpawning(); — REMOVIDO daqui!
     }
