@@ -1,70 +1,79 @@
 using UnityEngine;
 using Pathfinding;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(AIPath))]
 public class AIAgent : MonoBehaviour
 {
-    [HideInInspector] public float moveSpeed;
+    [Header("Movimento")]
+    [Tooltip("Velocidade máxima deste agente (configure no prefab)")]
+    [SerializeField] public float moveSpeed = 5f;
+
+    [Header("Alvo")]
+    [Tooltip("Quem este agente deve perseguir")]
+    [SerializeField] public EntityType targetType;
+
+    [Header("Retargeting")]
+    [Tooltip("Segundos entre buscas pelo alvo mais próximo")]
+    [SerializeField] private float retargetInterval = 0.5f;
+
     private AIPath path;
     private Transform target;
-
-    [SerializeField] private float retargetInterval = 0.5f;
     private float retargetTimer;
 
     void Awake()
     {
         path = GetComponent<AIPath>();
+        // inicializa o path usando o valor configurado no Inspector
+        path.maxSpeed = moveSpeed;
         retargetTimer = 0f;
-    }
-
-    /// <summary>
-    /// Permite ao spawner definir um alvo inicial ao instanciar o vírus.
-    /// </summary>
-    public void SetTarget(Transform newTarget)
-    {
-        target = newTarget;
     }
 
     void Update()
     {
         if (path == null) return;
 
-        // Decrementa o timer
         retargetTimer -= Time.deltaTime;
-
-        // Se chegou a hora de retarget ou target inválido
         if (retargetTimer <= 0f ||
             target == null ||
             !target.gameObject.activeInHierarchy)
         {
-            target = FindClosestRBC();
+            // escolhe a lista certa conforme targetType
+            switch (targetType)
+            {
+                case EntityType.RBC:
+                    target = FindClosest(RBCTracker.AllRBCs);
+                    break;
+                case EntityType.Virus:
+                    target = FindClosest(VirusTracker.AllViruses);
+                    break;
+                // adicione mais cases se precisar
+            }
             retargetTimer = retargetInterval;
         }
 
-        // Atualiza destino
         if (target != null)
         {
+            // garante que a velocidade aplicada seja a do prefab
             path.maxSpeed = moveSpeed;
             path.destination = target.position;
         }
     }
 
-    /// <summary>
-    /// Varre todos os RBC em cena e retorna o mais próximo.
-    /// </summary>
-    private Transform FindClosestRBC()
+    private Transform FindClosest(List<Transform> list)
     {
         Transform best = null;
         float bestSqr = float.MaxValue;
         Vector3 pos = transform.position;
 
-        foreach (var rbc in RBCTracker.AllRBCs)
+        foreach (var t in list)
         {
-            if (rbc == null || !rbc.gameObject.activeInHierarchy) continue;
-            float d = (rbc.position - pos).sqrMagnitude;
+            if (t == null || !t.gameObject.activeInHierarchy) continue;
+            float d = (t.position - pos).sqrMagnitude;
             if (d < bestSqr)
             {
                 bestSqr = d;
-                best = rbc;
+                best = t;
             }
         }
         return best;
