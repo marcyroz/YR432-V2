@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      rbc_infected_0: 57668438159059521
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

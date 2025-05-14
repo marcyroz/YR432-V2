@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      globulo_branco_0: -1626467188816424517
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

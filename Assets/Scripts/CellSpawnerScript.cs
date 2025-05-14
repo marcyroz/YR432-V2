@@ -59,16 +59,43 @@ public class CellSpawnerScript : MonoBehaviour
 
             if (cell != null)
             {
+                // Inicializa dados genéricos
                 CellScript script = cell.GetComponent<CellScript>();
-                if (script != null)
-                    script.Initialize(cellData.data);
-
+                script?.Initialize(cellData.data);
                 activeCells.Add(cell);
+
+                // Se for vírus, defina o target pro mais próximo RBC
+                if (cellData.data.entityType == "Virus")
+                {
+                    var agent = cell.GetComponent<AIAgent>();
+                    if (agent != null)
+                    {
+                        Transform closest = FindClosestRBC(spawnPos);
+                        agent.SetTarget(closest);
+                        agent.moveSpeed = cellData.data.velocity;
+                    }
+                }
             }
 
             CleanupList();
             yield return new WaitForSeconds(interval);
         }
+    }
+
+    private Transform FindClosestRBC(Vector3 fromPosition)
+    {
+        Transform best = null;
+        float bestDist = float.MaxValue;
+        foreach (var rbc in RBCTracker.AllRBCs)
+        {
+            float d = (rbc.position - fromPosition).sqrMagnitude;
+            if (d < bestDist)
+            {
+                bestDist = d;
+                best = rbc;
+            }
+        }
+        return best;
     }
 
     private Vector3 GetValidSpawnPosition()
