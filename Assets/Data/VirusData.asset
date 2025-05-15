@@ -16,5 +16,5 @@ MonoBehaviour:
   health: 6
   resistance: 4
   reproductionRate: 4
-  velocity: 18
+  velocity: 10
   strength: 10

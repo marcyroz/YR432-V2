@@ -100,7 +100,7 @@ public class CellSpawnerScript : MonoBehaviour
 
     private IEnumerator SpawnLoop(CellSpawnData cellData)
     {
-        float interval = 20f / Mathf.Max(1, cellData.baseData.reproductionRate);
+        // float interval = 20f / Mathf.Max(1, cellData.baseData.reproductionRate);
         yield return new WaitForSeconds(1f);
 
         while (true)
@@ -117,9 +117,19 @@ public class CellSpawnerScript : MonoBehaviour
                 {
                     CellStats stats = modifiedStats[cellData.baseData.entityType];
                     script.Initialize(cellData.baseData, stats);
+
+                    // DEBUG: Mostrar as propriedades completas
+                    Debug.Log(
+                        $"Nova {cellData.baseData.entityType} criada com stats: " +
+                        $"Saude={stats.health}, " +
+                        $"Resistencia={stats.resistance}, " +
+                        $"Reproducao={stats.reproductionRate}, " +
+                        $"Velocidade={stats.velocity}, " +
+                        $"Forca={stats.strength}, " +
+                        $"Infectada={stats.infected}");
                 }
                 // 1) Inicializa CellScript
-                cell.GetComponent<CellScript>()?.Initialize(cellData.baseData);
+                // cell.GetComponent<CellScript>()?.Initialize(cellData.baseData);
                 activeCells.Add(cell);
 
                 // 2) Se tiver AIAgent, configure targetType e moveSpeed
@@ -127,7 +137,7 @@ public class CellSpawnerScript : MonoBehaviour
                 if (agent != null)
                 {
                     // velocity vem do CellData
-                    agent.moveSpeed = cellData.baseData.velocity;
+                    agent.moveSpeed = modifiedStats[cellData.baseData.entityType].velocity;
 
                     // targetType (enum) define quem perseguir
                     // mapeando a string data.entityType para o enum
