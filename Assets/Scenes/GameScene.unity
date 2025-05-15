@@ -238,7 +238,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 13794854}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveReproduction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &13794854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,7 +1235,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 84765013}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &84765013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1779,7 +1803,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 110766764}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddResistance
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &110766764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2964,11 +3000,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellTypes:
   - poolTag: WBC
-    data: {fileID: 11400000, guid: c2ad859e31a3f754a8ae9ba15413b5c2, type: 2}
+    baseData: {fileID: 11400000, guid: c2ad859e31a3f754a8ae9ba15413b5c2, type: 2}
   - poolTag: RBC
-    data: {fileID: 11400000, guid: bad23a468d0248a4abf3aa12f71509d2, type: 2}
+    baseData: {fileID: 11400000, guid: bad23a468d0248a4abf3aa12f71509d2, type: 2}
   - poolTag: Virus
-    data: {fileID: 11400000, guid: 3c759f1d672bb834481a8f30c308cb81, type: 2}
+    baseData: {fileID: 11400000, guid: 3c759f1d672bb834481a8f30c308cb81, type: 2}
   minDistanceBetweenCells: 1.5
 --- !u!4 &221693197
 Transform:
@@ -3067,7 +3103,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 223370575}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &223370575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3460,7 +3508,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 255483081}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveStrength
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &255483081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4656,7 +4716,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 402321859}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveResistance
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &402321859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5493,7 +5565,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 493405930}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddVelocity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &493405930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5750,7 +5834,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 496471256}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddReproduction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &496471256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6509,7 +6605,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 605188923}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveVelocity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &605188923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7600,7 +7708,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 713348746}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddResistance
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &713348746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9815,7 +9935,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 941664210}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveResistance
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &941664210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10877,7 +11009,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1045647055}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddStrength
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1045647055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11524,7 +11668,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1080624267}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddVelocity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1080624267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13194,6 +13350,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1188255800}
+  - component: {fileID: 1188255802}
+  - component: {fileID: 1188255801}
   m_Layer: 5
   m_Name: Virus view
   m_TagString: Untagged
@@ -13226,6 +13384,39 @@ RectTransform:
   m_AnchoredPosition: {x: -212.46, y: -76.38513}
   m_SizeDelta: {x: 636.91, y: 503.1063}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1188255801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188255799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88103f5c422882e4ca670a6054e25935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityType: Virus
+  cellSpawner: {fileID: 221693196}
+  healthText: {fileID: 1951369454}
+  resistanceText: {fileID: 1294987316}
+  reproductionText: {fileID: 1505677371}
+  velocityText: {fileID: 1532998824}
+  strengthText: {fileID: 38713150}
+--- !u!114 &1188255802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188255799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a90be46538c51a42a36ad4142ae3e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpawner: {fileID: 221693196}
+  dropdown: {fileID: 904639356}
 --- !u!1 &1210267959
 GameObject:
   m_ObjectHideFlags: 0
@@ -14099,7 +14290,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1282582761}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveStrength
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1282582761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14777,7 +14980,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1342004656}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddVelocity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1342004656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15359,7 +15574,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1387281501}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveReproduction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1387281501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15752,7 +15979,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1414000749}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1414000749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15873,7 +16112,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1433437918}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveReproduction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1433437918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16069,7 +16320,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1442240550}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddReproduction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1442240550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16678,7 +16941,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1528521274}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1528521274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17232,7 +17507,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1572896880}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveVelocity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1572896880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17416,6 +17703,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1589671201}
+  - component: {fileID: 1589671203}
+  - component: {fileID: 1589671202}
   m_Layer: 5
   m_Name: WBC View
   m_TagString: Untagged
@@ -17448,6 +17737,39 @@ RectTransform:
   m_AnchoredPosition: {x: -212.46, y: -76.38513}
   m_SizeDelta: {x: 636.91, y: 503.1063}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1589671202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589671200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88103f5c422882e4ca670a6054e25935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityType: WBC
+  cellSpawner: {fileID: 221693196}
+  healthText: {fileID: 467131040}
+  resistanceText: {fileID: 226514283}
+  reproductionText: {fileID: 493651238}
+  velocityText: {fileID: 1352768992}
+  strengthText: {fileID: 149034416}
+--- !u!114 &1589671203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589671200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a90be46538c51a42a36ad4142ae3e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpawner: {fileID: 221693196}
+  dropdown: {fileID: 904639356}
 --- !u!1 &1621330126
 GameObject:
   m_ObjectHideFlags: 0
@@ -17530,7 +17852,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1621330129}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveResistance
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1621330129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18570,7 +18904,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1713117116}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1713117116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18691,7 +19037,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1721181337}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddResistance
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1721181337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18741,6 +19099,7 @@ GameObject:
   - component: {fileID: 1722459652}
   - component: {fileID: 1722459654}
   - component: {fileID: 1722459653}
+  - component: {fileID: 1722459655}
   m_Layer: 5
   m_Name: Computer closeup
   m_TagString: Untagged
@@ -18811,6 +19170,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722459651}
   m_CullTransparentMesh: 1
+--- !u!114 &1722459655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722459651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a90be46538c51a42a36ad4142ae3e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpawner: {fileID: 221693196}
+  dropdown: {fileID: 904639356}
 --- !u!1 &1730104097
 GameObject:
   m_ObjectHideFlags: 0
@@ -19092,6 +19465,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1743103774}
+  - component: {fileID: 1743103776}
+  - component: {fileID: 1743103775}
   m_Layer: 5
   m_Name: RBC View
   m_TagString: Untagged
@@ -19123,6 +19498,39 @@ RectTransform:
   m_AnchoredPosition: {x: -212.46, y: -76.38513}
   m_SizeDelta: {x: 636.91, y: 503.1063}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1743103775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743103773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88103f5c422882e4ca670a6054e25935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityType: RBC
+  cellSpawner: {fileID: 221693196}
+  healthText: {fileID: 757268233}
+  resistanceText: {fileID: 49637862}
+  reproductionText: {fileID: 1809286808}
+  velocityText: {fileID: 1698878153}
+  strengthText: {fileID: 0}
+--- !u!114 &1743103776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743103773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a90be46538c51a42a36ad4142ae3e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpawner: {fileID: 221693196}
+  dropdown: {fileID: 904639356}
 --- !u!1 &1749431553
 GameObject:
   m_ObjectHideFlags: 0
@@ -20767,7 +21175,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1870090085}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddStrength
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1870090085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20934,9 +21354,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textMeshPro: {fileID: 813798103}
-  normalCharDelay: 0.05
-  acceleratedCharDelay: 0.01
-  timeBtwWords: 0.5
+  normalCharDelay: 0
+  acceleratedCharDelay: 0
+  timeBtwWords: 0
   arrowIndicator: {fileID: 2064937038}
   audioSource: {fileID: 1879924224}
   typingSounds:
@@ -21556,7 +21976,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1942908284}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: RemoveVelocity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1942908284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22107,7 +22539,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1957790625}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddReproduction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1957790625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23731,7 +24175,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2082226797}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1722459655}
+        m_TargetAssemblyTypeName: StatsManagerScript, Assembly-CSharp
+        m_MethodName: AddHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2082226797
 MonoBehaviour:
   m_ObjectHideFlags: 0
