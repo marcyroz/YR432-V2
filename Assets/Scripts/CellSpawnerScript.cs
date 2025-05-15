@@ -8,7 +8,7 @@ public class CellSpawnerScript : MonoBehaviour
     public class CellSpawnData
     {
         public string poolTag;
-        public CellData data;
+        public CellData data;   // mantém seu CellData com string entityType e float velocity
     }
 
     [SerializeField] private List<CellSpawnData> cellTypes;
@@ -16,20 +16,16 @@ public class CellSpawnerScript : MonoBehaviour
 
     private List<GameObject> activeCells = new List<GameObject>();
     private List<Coroutine> spawnCoroutines = new List<Coroutine>();
-
     private bool isSpawning = false;
 
     public void StartSpawning()
     {
         if (isSpawning) return;
         isSpawning = true;
+        StopSpawning();
 
-        StopSpawning(); // safety
-        foreach (var cell in cellTypes)
-        {
-            Coroutine routine = StartCoroutine(SpawnLoop(cell));
-            spawnCoroutines.Add(routine);
-        }
+        foreach (var cellData in cellTypes)
+            spawnCoroutines.Add(StartCoroutine(SpawnLoop(cellData)));
     }
 
     public void StopSpawning()
@@ -38,18 +34,15 @@ public class CellSpawnerScript : MonoBehaviour
         isSpawning = false;
 
         foreach (var routine in spawnCoroutines)
-        {
             if (routine != null)
                 StopCoroutine(routine);
-        }
+
         spawnCoroutines.Clear();
     }
-
 
     private IEnumerator SpawnLoop(CellSpawnData cellData)
     {
         float interval = 20f / Mathf.Max(1, cellData.data.reproductionRate);
-
         yield return new WaitForSeconds(1f);
 
         while (true)
@@ -59,43 +52,32 @@ public class CellSpawnerScript : MonoBehaviour
 
             if (cell != null)
             {
-                // Inicializa dados genéricos
-                CellScript script = cell.GetComponent<CellScript>();
-                script?.Initialize(cellData.data);
+                // 1) Inicializa CellScript
+                cell.GetComponent<CellScript>()?.Initialize(cellData.data);
                 activeCells.Add(cell);
 
-                // Se for vírus, defina o target pro mais próximo RBC
-                if (cellData.data.entityType == "Virus")
+                // 2) Se tiver AIAgent, configure targetType e moveSpeed
+                var agent = cell.GetComponent<AIAgent>();
+                if (agent != null)
                 {
-                    var agent = cell.GetComponent<AIAgent>();
-                    if (agent != null)
-                    {
-                        Transform closest = FindClosestRBC(spawnPos);
-                        agent.SetTarget(closest);
-                        agent.moveSpeed = cellData.data.velocity;
-                    }
+                    // velocity vem do CellData
+                    agent.moveSpeed = cellData.data.velocity;
+
+                    // targetType (enum) define quem perseguir
+                    // mapeando a string data.entityType para o enum
+                    if (cellData.data.entityType == "Virus")
+                        agent.targetType = EntityType.RBC; // Vírus persegue RBC
+                    else if (cellData.data.entityType == "WBC")
+                        agent.targetType = EntityType.Virus; // WBC persegue Vírus
+                    else if (cellData.data.entityType == "RBC")
+                        agent.targetType = EntityType.Wander;  // RBC vagueia
+                    // adicione outros mapeamentos conforme necessário
                 }
             }
 
             CleanupList();
             yield return new WaitForSeconds(interval);
         }
-    }
-
-    private Transform FindClosestRBC(Vector3 fromPosition)
-    {
-        Transform best = null;
-        float bestDist = float.MaxValue;
-        foreach (var rbc in RBCTracker.AllRBCs)
-        {
-            float d = (rbc.position - fromPosition).sqrMagnitude;
-            if (d < bestDist)
-            {
-                bestDist = d;
-                best = rbc;
-            }
-        }
-        return best;
     }
 
     private Vector3 GetValidSpawnPosition()
@@ -105,15 +87,13 @@ public class CellSpawnerScript : MonoBehaviour
 
         do
         {
-            float camHeight = 2f * Camera.main.orthographicSize;
-            float camWidth = camHeight * Camera.main.aspect;
-
-            float x = Random.Range(-camWidth / 2f, camWidth / 2f);
-            float y = Random.Range(-camHeight / 2f, camHeight / 2f);
-
-            candidate = new Vector3(x, y, 0);
+            float camH = 2f * Camera.main.orthographicSize;
+            float camW = camH * Camera.main.aspect;
+            candidate = new Vector3(
+                Random.Range(-camW / 2f, camW / 2f),
+                Random.Range(-camH / 2f, camH / 2f),
+                0);
             attempts++;
-
             if (attempts > 20) break;
         }
         while (!IsFarEnough(candidate));
@@ -124,11 +104,8 @@ public class CellSpawnerScript : MonoBehaviour
     private bool IsFarEnough(Vector3 pos)
     {
         foreach (var cell in activeCells)
-        {
-            if (cell == null) continue;
-            if (Vector3.Distance(pos, cell.transform.position) < minDistanceBetweenCells)
+            if (cell != null && Vector3.Distance(pos, cell.transform.position) < minDistanceBetweenCells)
                 return false;
-        }
         return true;
     }
 
@@ -139,22 +116,10 @@ public class CellSpawnerScript : MonoBehaviour
 
     public void ResetSpawning()
     {
-        StopSpawning();          // Para todas as corrotinas
-        ClearActiveCells();      // Desativa e limpa a lista de células
-        StartSpawning();         // Recomeça o spawn
-    }
-
-    private void ClearActiveCells()
-    {
+        StopSpawning();
         foreach (var cell in activeCells)
-        {
-            if (cell != null)
-            {
-                cell.SetActive(false); // Devolvendo pra pool
-            }
-        }
-
+            if (cell != null) cell.SetActive(false);
         activeCells.Clear();
+        StartSpawning();
     }
-
 }
