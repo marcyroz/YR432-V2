@@ -3,5 +3,6 @@ public enum EntityType
     Virus,
     RBC,
     WBC,
-    IRBC
+    IRBC,
+    Wander
 }

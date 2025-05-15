@@ -6,16 +6,22 @@ using System.Collections.Generic;
 public class AIAgent : MonoBehaviour
 {
     [Header("Movimento")]
-    [Tooltip("Velocidade máxima deste agente (configure no prefab)")]
+    [Tooltip("Velocidade máxima deste agente")]
     [SerializeField] public float moveSpeed = 5f;
 
     [Header("Alvo")]
-    [Tooltip("Quem este agente deve perseguir")]
+    [Tooltip("Quem este agente deve perseguir (ou Wander para movimento aleatório)")]
     [SerializeField] public EntityType targetType;
 
     [Header("Retargeting")]
     [Tooltip("Segundos entre buscas pelo alvo mais próximo")]
     [SerializeField] private float retargetInterval = 0.5f;
+
+    [Header("Wander Settings (para RBC)")]
+    [Tooltip("Quanto longe ele pode ir do ponto central")]
+    [SerializeField] private float wanderRadius = 3f;
+    [Tooltip("Desvio do centro de wander; 0 = centro é o próprio transform")]
+    [SerializeField] private float wanderCenterDeviation = 0f;
 
     private AIPath path;
     private Transform target;
@@ -24,7 +30,6 @@ public class AIAgent : MonoBehaviour
     void Awake()
     {
         path = GetComponent<AIPath>();
-        // inicializa o path usando o valor configurado no Inspector
         path.maxSpeed = moveSpeed;
         retargetTimer = 0f;
     }
@@ -34,30 +39,47 @@ public class AIAgent : MonoBehaviour
         if (path == null) return;
 
         retargetTimer -= Time.deltaTime;
-        if (retargetTimer <= 0f ||
-            target == null ||
-            !target.gameObject.activeInHierarchy)
+
+        // Wander (RBC) ou Chase (outros)
+        if (targetType == EntityType.Wander)
         {
-            // escolhe a lista certa conforme targetType
-            switch (targetType)
+            // Wander
+            if (retargetTimer <= 0f ||
+                Vector2.Distance(transform.position, path.destination) < 0.1f)
             {
-                case EntityType.RBC:
-                    target = FindClosest(RBCTracker.AllRBCs);
-                    break;
-                case EntityType.Virus:
-                    target = FindClosest(VirusTracker.AllViruses);
-                    break;
-                // adicione mais cases se precisar
+                path.destination = GetRandomWanderPoint();
+                retargetTimer = retargetInterval;
             }
-            retargetTimer = retargetInterval;
+        }
+        else
+        {
+            // Chase
+            if (retargetTimer <= 0f ||
+                target == null ||
+                !target.gameObject.activeInHierarchy)
+            {
+                switch (targetType)
+                {
+                    case EntityType.Virus:
+                        target = FindClosest(VirusTracker.AllViruses);
+                        break;
+                    case EntityType.WBC:
+                        target = FindClosest(VirusTracker.AllViruses);
+                        break;
+                    case EntityType.IRBC:
+                    case EntityType.RBC:
+                        target = FindClosest(RBCTracker.AllRBCs);
+                        break;
+                }
+                retargetTimer = retargetInterval;
+            }
+
+            if (target != null)
+                path.destination = target.position;
         }
 
-        if (target != null)
-        {
-            // garante que a velocidade aplicada seja a do prefab
-            path.maxSpeed = moveSpeed;
-            path.destination = target.position;
-        }
+        // Mantém a velocidade atualizada
+        path.maxSpeed = moveSpeed;
     }
 
     private Transform FindClosest(List<Transform> list)
@@ -77,5 +99,13 @@ public class AIAgent : MonoBehaviour
             }
         }
         return best;
+    }
+
+    private Vector3 GetRandomWanderPoint()
+    {
+        // centro = transform.position + desvio (0 = usa o próprio transform)
+        Vector2 center = (Vector2)transform.position + Random.insideUnitCircle * wanderCenterDeviation;
+        Vector2 offset = Random.insideUnitCircle * wanderRadius;
+        return center + offset;
     }
 }

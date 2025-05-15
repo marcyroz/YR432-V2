@@ -66,11 +66,11 @@ public class CellSpawnerScript : MonoBehaviour
                     // targetType (enum) define quem perseguir
                     // mapeando a string data.entityType para o enum
                     if (cellData.data.entityType == "Virus")
-                        agent.targetType = EntityType.RBC;
+                        agent.targetType = EntityType.RBC; // Vírus persegue RBC
                     else if (cellData.data.entityType == "WBC")
-                        agent.targetType = EntityType.Virus;
+                        agent.targetType = EntityType.Virus; // WBC persegue Vírus
                     else if (cellData.data.entityType == "RBC")
-                        agent.targetType = EntityType.IRBC; // por exemplo, ou outro caso
+                        agent.targetType = EntityType.Wander;  // RBC vagueia
                     // adicione outros mapeamentos conforme necessário
                 }
             }
