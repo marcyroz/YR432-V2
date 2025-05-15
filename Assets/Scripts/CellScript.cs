@@ -10,14 +10,15 @@ public class CellScript : MonoBehaviour
     [HideInInspector] public int reproductionRate;
     [HideInInspector] public float velocity;
 
-    public void Initialize(CellData data)
+    public void Initialize(CellData data, CellStats stats)
     {
         cellData = data;
-        health = data.health;
-        resistance = data.resistance;
-        reproductionRate = data.reproductionRate;
-        velocity = data.velocity;
+        health = stats.health;
+        resistance = stats.resistance;
+        reproductionRate = stats.reproductionRate;
+        velocity = stats.velocity;
     }
+
 
     void OnEnable()
     {

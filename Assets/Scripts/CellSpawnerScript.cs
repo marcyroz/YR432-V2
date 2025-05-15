@@ -8,16 +8,74 @@ public class CellSpawnerScript : MonoBehaviour
     public class CellSpawnData
     {
         public string poolTag;
-        public CellData data;
+        public CellData baseData;
     }
 
     [SerializeField] private List<CellSpawnData> cellTypes;
+
+    private Dictionary<string, CellStats> modifiedStats = new();
     [SerializeField] private float minDistanceBetweenCells = 1.5f;
 
     private List<GameObject> activeCells = new List<GameObject>();
     private List<Coroutine> spawnCoroutines = new List<Coroutine>();
 
     private bool isSpawning = false;
+
+    public delegate void StatChanged(string entityType, CellStats newStats);
+    public event StatChanged OnStatsChanged;
+
+    void Awake()
+    {
+        // Cria uma cópia modificável dos stats para cada tipo
+        foreach (var cell in cellTypes)
+        {
+            modifiedStats[cell.baseData.entityType] = new CellStats(cell.baseData);
+        }
+    }
+
+    public CellStats GetStatsFor(string entityType)
+    {
+        return modifiedStats[entityType];
+    }
+
+    public void ModifyStat(string entityType, string statName, int delta)
+    {
+        if (!modifiedStats.ContainsKey(entityType)) return;
+
+        CellStats stats = modifiedStats[entityType];
+        CellData baseData = cellTypes.Find(c => c.baseData.entityType == entityType).baseData;
+
+        switch (statName)
+        {
+            case "health":
+                stats.health = Mathf.Max(baseData.health, stats.health + delta);
+                break;
+            case "resistance":
+                stats.resistance = Mathf.Max(baseData.resistance, stats.resistance + delta);
+                break;
+            case "reproductionRate":
+                stats.reproductionRate = Mathf.Max(baseData.reproductionRate, stats.reproductionRate + delta);
+                break;
+            case "velocity":
+                stats.velocity = Mathf.Max(baseData.velocity, stats.velocity + delta);
+                break;
+
+            case "strength":
+                if (baseData is WhiteBloodCellData wbc)
+                    stats.strength = Mathf.Max(wbc.strength, stats.strength + delta);
+                else if (baseData is VirusData virus)
+                    stats.strength = Mathf.Max(virus.strength, stats.strength + delta);
+                break;
+
+            case "infected":
+                if (baseData is RedBloodCellData)
+                    stats.infected = !stats.infected; // Alterna true/false
+                break;
+        }
+
+        OnStatsChanged?.Invoke(entityType, stats);
+    }
+
 
     public void StartSpawning()
     {
@@ -48,12 +106,10 @@ public class CellSpawnerScript : MonoBehaviour
 
     private IEnumerator SpawnLoop(CellSpawnData cellData)
     {
-        float interval = 20f / Mathf.Max(1, cellData.data.reproductionRate);
-
-        yield return new WaitForSeconds(1f);
-
         while (true)
         {
+            float interval = 20f / Mathf.Max(1, modifiedStats[cellData.baseData.entityType].reproductionRate);
+
             Vector3 spawnPos = GetValidSpawnPosition();
             GameObject cell = ObjectPooler.Instance.SpawnFromPool(cellData.poolTag, spawnPos, Quaternion.identity);
 
@@ -61,14 +117,16 @@ public class CellSpawnerScript : MonoBehaviour
             {
                 CellScript script = cell.GetComponent<CellScript>();
                 if (script != null)
-                    script.Initialize(cellData.data);
-
-                activeCells.Add(cell);
+                {
+                    CellStats stats = modifiedStats[cellData.baseData.entityType];
+                    script.Initialize(cellData.baseData, stats);
+                }
             }
 
             CleanupList();
             yield return new WaitForSeconds(interval);
         }
+
     }
 
     private Vector3 GetValidSpawnPosition()
