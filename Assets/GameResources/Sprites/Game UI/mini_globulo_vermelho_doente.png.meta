@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mini_globulo_vermelho_doente_0: 5813325521903471010
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

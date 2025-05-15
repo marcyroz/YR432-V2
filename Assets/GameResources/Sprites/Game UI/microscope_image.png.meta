@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      microscope_image_0: -2236678587399561648
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mini_virus_0: -4208974425821866283
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
