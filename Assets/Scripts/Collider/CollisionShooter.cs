@@ -3,21 +3,29 @@ using System;
 
 public class CollisionShooter : MonoBehaviour
 {
-    [Header("Identificação desta entidade")]
     public EntityType entityType;
 
-    // Evento que dispara sempre que há colisão
-    public static event Action<EntityType, EntityType> OnEntitiesCollided;
+    // Eventos para entrada e saída de trigger
+    public static event Action<EntityType, EntityType, GameObject, GameObject> OnEntitiesCollidedEnter;
+    public static event Action<EntityType, EntityType, GameObject, GameObject> OnEntitiesCollidedExit;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         var otherShooter = other.GetComponent<CollisionShooter>();
         if (otherShooter == null) return;
+        OnEntitiesCollidedEnter?.Invoke(
+            entityType, otherShooter.entityType,
+            this.gameObject, otherShooter.gameObject
+        );
+    }
 
-        // Dispara o evento com (quem colidiu, com quem)
-        OnEntitiesCollided?.Invoke(entityType, otherShooter.entityType);
-
-        // Console temporário para verificar
-        Debug.Log($"{entityType} colidiu com {otherShooter.entityType}");
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        var otherShooter = other.GetComponent<CollisionShooter>();
+        if (otherShooter == null) return;
+        OnEntitiesCollidedExit?.Invoke(
+            entityType, otherShooter.entityType,
+            this.gameObject, otherShooter.gameObject
+        );
     }
 }

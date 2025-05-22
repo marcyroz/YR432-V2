@@ -1,22 +1,78 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GameCollisionManager : MonoBehaviour
 {
-    private void OnEnable()
+    // Struct para chave de dicionário
+    private struct Pair { public GameObject wbc, virus; }
+
+    // Tempo acumulado de contato por par
+    private Dictionary<Pair, float> contactTimers = new Dictionary<Pair, float>();
+
+    void OnEnable()
     {
-        CollisionShooter.OnEntitiesCollided += HandleCollision;
+        CollisionShooter.OnEntitiesCollidedEnter += OnColliderEnter;
+        CollisionShooter.OnEntitiesCollidedExit += OnColliderExit;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
-        CollisionShooter.OnEntitiesCollided -= HandleCollision;
+        CollisionShooter.OnEntitiesCollidedEnter -= OnColliderEnter;
+        CollisionShooter.OnEntitiesCollidedExit -= OnColliderExit;
     }
 
-    private void HandleCollision(EntityType who, EntityType whom)
+    // Quando qualquer colisão entra
+    private void OnColliderEnter(
+        EntityType who, EntityType whom,
+        GameObject whoObj, GameObject whomObj
+    )
     {
-        Debug.Log($"[Manager] {who} bateu em {whom}");
+        if (who == EntityType.WBC && whom == EntityType.Virus)
+        {
+            var key = new Pair { wbc = whoObj, virus = whomObj };
+            if (!contactTimers.ContainsKey(key))
+                contactTimers[key] = 0f;
+        }
+    }
 
-        // if (who == EntityType.Virus && whom == EntityType.RBC) Infect(…);
-        // if (who == EntityType.WBC   && whom == EntityType.Virus) DestroyVirus(…);
+    // Quando sai do contato
+    private void OnColliderExit(
+        EntityType who, EntityType whom,
+        GameObject whoObj, GameObject whomObj
+    )
+    {
+        if (who == EntityType.WBC && whom == EntityType.Virus)
+        {
+            var key = new Pair { wbc = whoObj, virus = whomObj };
+            contactTimers.Remove(key);
+        }
+    }
+
+    void Update()
+    {
+        // Liste keys para evitar modificação durante iteração
+        var keys = new List<Pair>(contactTimers.Keys);
+        foreach (var pair in keys)
+        {
+            // Se algum foi destruído/desativado, limpe
+            if (!pair.wbc || !pair.virus ||
+                !pair.wbc.activeInHierarchy ||
+                !pair.virus.activeInHierarchy)
+            {
+                contactTimers.Remove(pair);
+                continue;
+            }
+
+            // Acumula tempo
+            contactTimers[pair] += Time.deltaTime;
+            if (contactTimers[pair] >= 3f)
+            {
+                // Destrói o vírus após 3s de contato
+                pair.virus.SetActive(false);
+                Debug.Log($"WBC destruiu vírus após 3s de contato");
+
+                contactTimers.Remove(pair);
+            }
+        }
     }
 }

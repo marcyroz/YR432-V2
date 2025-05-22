@@ -119,14 +119,14 @@ public class CellSpawnerScript : MonoBehaviour
                     script.Initialize(cellData.baseData, stats);
 
                     // DEBUG: Mostrar as propriedades completas
-                    Debug.Log(
-                        $"Nova {cellData.baseData.entityType} criada com stats: " +
-                        $"Saude={stats.health}, " +
-                        $"Resistencia={stats.resistance}, " +
-                        $"Reproducao={stats.reproductionRate}, " +
-                        $"Velocidade={stats.velocity}, " +
-                        $"Forca={stats.strength}, " +
-                        $"Infectada={stats.infected}");
+                    // Debug.Log(
+                    //     $"Nova {cellData.baseData.entityType} criada com stats: " +
+                    //     $"Saude={stats.health}, " +
+                    //     $"Resistencia={stats.resistance}, " +
+                    //     $"Reproducao={stats.reproductionRate}, " +
+                    //     $"Velocidade={stats.velocity}, " +
+                    //     $"Forca={stats.strength}, " +
+                    //     $"Infectada={stats.infected}");
                 }
                 // 1) Inicializa CellScript
                 // cell.GetComponent<CellScript>()?.Initialize(cellData.baseData);
