@@ -5,6 +5,7 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioClip gameMusic;
     [SerializeField] private AudioClip gameOverMusic;
+    [SerializeField] private AudioClip goodEndingMusic;
 
     public void PlayGameMusic()
     {
@@ -20,6 +21,14 @@ public class MusicManager : MonoBehaviour
         if (musicSource.clip != gameOverMusic)
         {
             musicSource.clip = gameOverMusic;
+            musicSource.Play();
+        }
+    }
+    public void PlayGoodEndingMusic()
+    {
+        if (musicSource.clip != goodEndingMusic)
+        {
+            musicSource.clip = goodEndingMusic;
             musicSource.Play();
         }
     }
