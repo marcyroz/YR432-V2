@@ -9,6 +9,10 @@ public class GameCollisionManager : MonoBehaviour
     // Tempo acumulado de contato por par
     private Dictionary<Pair, float> contactTimers = new Dictionary<Pair, float>();
 
+    // A cada quantos segundos o WBC aplica dano
+    [SerializeField, Tooltip("Intervalo em segundos entre ticks de dano")]
+    private float damageInterval = 3f;
+
     void OnEnable()
     {
         CollisionShooter.OnEntitiesCollidedEnter += OnColliderEnter;
@@ -65,13 +69,52 @@ public class GameCollisionManager : MonoBehaviour
 
             // Acumula tempo
             contactTimers[pair] += Time.deltaTime;
-            if (contactTimers[pair] >= 3f)
-            {
-                // Destrói o vírus após 3s de contato
-                pair.virus.SetActive(false);
-                Debug.Log($"WBC destruiu vírus após 3s de contato");
 
-                contactTimers.Remove(pair);
+            if (contactTimers[pair] >= damageInterval)
+            {
+                // Pega o strength do WBC (via dados)
+                var wbcScript = pair.wbc.GetComponent<CellScript>();
+                int damage = 0;
+                if (wbcScript?.cellData is WhiteBloodCellData wbcData)
+                    damage = wbcData.strength;
+
+                // Aplica dano ao vírus
+                var virusScript = pair.virus.GetComponent<CellScript>();
+                if (virusScript != null)
+                {
+                    // Mitigação percentual pelo atributo resistance
+                    int resistance = virusScript.resistance;
+                    int effectiveDamage = Mathf.Max(
+                        1,
+                        Mathf.RoundToInt(damage * 100f / (100f + resistance))
+                    );
+
+                    // Captura vida antes do hit
+                    int beforeHealth = virusScript.health;
+
+                    // Aplica o dano mitigado
+                    virusScript.TakeDamage(effectiveDamage);
+
+                    // Captura vida depois do hit
+                    int afterHealth = virusScript.health;
+
+                    // Log detalhado
+                    Debug.Log(
+                        $"WBC aplicou {effectiveDamage} de dano ao vírus " +
+                        $"(bruto {damage}, res {resistance}) — Vida: {beforeHealth} → {afterHealth}"
+                    );
+
+                    // Se o vírus morreu, remova o par
+                    if (afterHealth <= 0)
+                    {
+                        Debug.Log("Vírus foi destruído!");
+                        contactTimers.Remove(pair);
+                        continue;
+                    }
+                }
+
+                // Subtrai apenas o intervalo, mantendo sobra de tempo
+                contactTimers[pair] -= damageInterval;
             }
         }
     }

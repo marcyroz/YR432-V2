@@ -9685,10 +9685,10 @@ MonoBehaviour:
   pools:
   - tag: Virus
     prefab: {fileID: 4315808051615239576, guid: f569cb4b0d0432447beda47bf027ed85, type: 3}
-    size: 100
+    size: 10
   - tag: WBC
     prefab: {fileID: 9099699829418982766, guid: fe631b5429faac5449c530963d2f1d8e, type: 3}
-    size: 100
+    size: 1
   - tag: RBC
     prefab: {fileID: 4646503568411448432, guid: a7e1636301d058a4b8aa43d6ba8a52d2, type: 3}
     size: 100
@@ -15347,6 +15347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8302efbe7ed7de4582214a1654c216a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageInterval: 3
 --- !u!4 &1369330512
 Transform:
   m_ObjectHideFlags: 0
