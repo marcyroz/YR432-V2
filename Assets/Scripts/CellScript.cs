@@ -24,12 +24,18 @@ public class CellScript : MonoBehaviour
     {
         if (countBoard != null && cellData != null)
             countBoard.addEntity(cellData.entityType);
+
+        if (GameStatsTracker.Instance != null && cellData != null)
+            GameStatsTracker.Instance.RegisterCellBorn(cellData.entityType);
     }
 
     void OnDisable()
     {
         if (countBoard != null && cellData != null)
             countBoard.removeEntity(cellData.entityType);
+
+        if (GameStatsTracker.Instance != null && cellData != null)
+            GameStatsTracker.Instance.RegisterCellDeath(cellData.entityType);
     }
 
     public void TakeDamage(int damage)

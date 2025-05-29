@@ -65,11 +65,6 @@ public class CellSpawnerScript : MonoBehaviour
                 else if (baseData is VirusData virus)
                     stats.strength = Mathf.Max(virus.strength, stats.strength + delta);
                 break;
-
-            case "infected":
-                if (baseData is RedBloodCellData)
-                    stats.infected = !stats.infected; // Alterna true/false
-                break;
         }
 
         OnStatsChanged?.Invoke(entityType, stats);
@@ -78,9 +73,8 @@ public class CellSpawnerScript : MonoBehaviour
 
     public void StartSpawning()
     {
-        if (isSpawning) return;
-        isSpawning = true;
-        StopSpawning();
+        StopSpawning();          // ← Primeiro para qualquer loop anterior
+        isSpawning = true;       // ← Agora ativa o novo ciclo
 
         foreach (var cellData in cellTypes)
             spawnCoroutines.Add(StartCoroutine(SpawnLoop(cellData)));
@@ -100,10 +94,9 @@ public class CellSpawnerScript : MonoBehaviour
 
     private IEnumerator SpawnLoop(CellSpawnData cellData)
     {
-        // float interval = 20f / Mathf.Max(1, cellData.baseData.reproductionRate);
         yield return new WaitForSeconds(1f);
 
-        while (true)
+        while (isSpawning) // ✅ checagem da flag
         {
             float interval = 20f / Mathf.Max(1, modifiedStats[cellData.baseData.entityType].reproductionRate);
 
@@ -117,44 +110,28 @@ public class CellSpawnerScript : MonoBehaviour
                 {
                     CellStats stats = modifiedStats[cellData.baseData.entityType];
                     script.Initialize(cellData.baseData, stats);
-
-                    // DEBUG: Mostrar as propriedades completas
-                    Debug.Log(
-                        $"Nova {cellData.baseData.entityType} criada com stats: " +
-                        $"Saude={stats.health}, " +
-                        $"Resistencia={stats.resistance}, " +
-                        $"Reproducao={stats.reproductionRate}, " +
-                        $"Velocidade={stats.velocity}, " +
-                        $"Forca={stats.strength}, " +
-                        $"Infectada={stats.infected}");
+                    Debug.Log($"Nova {cellData.baseData.entityType} criada com stats: ...");
                 }
-                // 1) Inicializa CellScript
-                // cell.GetComponent<CellScript>()?.Initialize(cellData.baseData);
+
                 activeCells.Add(cell);
 
-                // 2) Se tiver AIAgent, configure targetType e moveSpeed
                 var agent = cell.GetComponent<AIAgent>();
                 if (agent != null)
                 {
-                    // velocity vem do CellData
                     agent.moveSpeed = modifiedStats[cellData.baseData.entityType].velocity;
 
-                    // targetType (enum) define quem perseguir
-                    // mapeando a string data.entityType para o enum
                     if (cellData.baseData.entityType == "Virus")
-                        agent.targetType = EntityType.RBC; // Vírus persegue RBC
+                        agent.targetType = EntityType.RBC;
                     else if (cellData.baseData.entityType == "WBC")
-                        agent.targetType = EntityType.Virus; // WBC persegue Vírus
+                        agent.targetType = EntityType.Virus;
                     else if (cellData.baseData.entityType == "RBC")
-                        agent.targetType = EntityType.Wander;  // RBC vagueia
-                    // adicione outros mapeamentos conforme necessário
+                        agent.targetType = EntityType.Wander;
                 }
             }
 
             CleanupList();
             yield return new WaitForSeconds(interval);
         }
-
     }
 
     private Vector3 GetValidSpawnPosition()

@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 6a0bcaf0d4c24da4fadf742a18922031
+guid: 72f74621dd5fc9e4195bacca26f6c491
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1482660464003699967
-    second: WwaS_0
+      213: -8287650901645349780
+    second: pixil-frame-0 (11)_0
+  - first:
+      213: -7726129009250017613
+    second: pixil-frame-0 (11)_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WwaS_0
+      name: pixil-frame-0 (11)_0
       rect:
         serializedVersion: 2
-        x: 121
-        y: 11
-        width: 65
-        height: 56
+        x: 14
+        y: 129
+        width: 392
+        height: 322
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 10b2b88d9288c6be0800000000000000
-      internalID: -1482660464003699967
+      spriteID: c6cabf03a695cfc80800000000000000
+      internalID: -8287650901645349780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pixil-frame-0 (11)_1
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 144
+        width: 202
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bedfc2d99647c490800000000000000
+      internalID: -7726129009250017613
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WwaS_0: -1482660464003699967
+      pixil-frame-0 (11)_0: -8287650901645349780
+      pixil-frame-0 (11)_1: -7726129009250017613
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

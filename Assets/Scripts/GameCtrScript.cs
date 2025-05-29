@@ -4,7 +4,8 @@ public class GameCtrScript : MonoBehaviour
 {
     [SerializeField] private TypewriterEffect typewriter;
     [SerializeField] private AudioClip clickAudioClip;
-    [SerializeField] private GameOverScreen gameOverScreen;
+    [SerializeField] private GameOverManager gameOverManager;
+    [SerializeField] private GoodEndingManager goodEndingManager;
     [SerializeField] private MusicManager musicManager;
     [SerializeField] private CellSpawnerScript cellSpawner; // 🎯 Referência ao spawner
 
@@ -13,7 +14,6 @@ public class GameCtrScript : MonoBehaviour
         CellScript.countBoard = Object.FindFirstObjectByType<CountBoardScript>();
         typewriter.OnDialogFinished.AddListener(OnDialogComplete);
         typewriter.ActivateDialog(); // Inicia o diálogo
-                                     // cellSpawner.StartSpawning(); — REMOVIDO daqui!
     }
 
     private void OnDialogComplete()
@@ -30,10 +30,18 @@ public class GameCtrScript : MonoBehaviour
 
     public void GameOver()
     {
-        gameOverScreen.Setup();
+        // gameOverScreen.Setup();
+        gameOverManager.StartGameOverCycle();
         musicManager.PlayGameOverMusic();
 
-        cellSpawner.StopSpawning(); // Para spawns no game over
+        cellSpawner.StopSpawning();
+    }
+
+    public void GoodEnding()
+    {
+        goodEndingManager.StartGoodEndingCycle();
+        musicManager.PlayGoodEndingMusic();
+        cellSpawner.StopSpawning();
     }
 
     public void PauseSpawns()
