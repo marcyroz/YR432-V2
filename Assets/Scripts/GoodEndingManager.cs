@@ -18,4 +18,10 @@ public class GoodEndingManager : MonoBehaviour
         yield return new WaitForSeconds(delayAfterImage);
         statsPanel.SetActive(true);
     }
+
+    public void EndGoodEndingCycle()
+    {
+        goodEndingScreen.SetActive(false);
+        statsPanel.SetActive(false);
+    }
 }

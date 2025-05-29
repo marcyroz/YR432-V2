@@ -70,6 +70,20 @@ public class TypewriterEffect : MonoBehaviour
         Debug.Log("Mostrando diálogo...");
     }
 
+    public void RestartDialog()
+    {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
+        index = -1;
+        dialogWindow.SetActive(false);
+        _textMeshPro.text = string.Empty;
+        ActivateDialog();
+    }
+
 
     void NextLine()
     {

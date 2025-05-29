@@ -37,39 +37,80 @@ public class CellSpawnerScript : MonoBehaviour
         return modifiedStats[entityType];
     }
 
-    public void ModifyStat(string entityType, string statName, int delta)
+    public bool ModifyStat(string entityType, string statName, int delta)
     {
-        if (!modifiedStats.ContainsKey(entityType)) return;
+        if (!modifiedStats.ContainsKey(entityType)) return false;
 
         CellStats stats = modifiedStats[entityType];
         CellData baseData = cellTypes.Find(c => c.baseData.entityType == entityType).baseData;
 
+        bool changed = false;
+
         switch (statName)
         {
             case "health":
-                stats.health = Mathf.Max(baseData.health, stats.health + delta);
+                int newHealth = stats.health + delta;
+                if (newHealth >= baseData.health)
+                {
+                    stats.health = newHealth;
+                    changed = true;
+                }
                 break;
+
             case "resistance":
-                stats.resistance = Mathf.Max(baseData.resistance, stats.resistance + delta);
+                int newRes = stats.resistance + delta;
+                if (newRes >= baseData.resistance)
+                {
+                    stats.resistance = newRes;
+                    changed = true;
+                }
                 break;
+
             case "reproductionRate":
-                stats.reproductionRate = Mathf.Max(baseData.reproductionRate, stats.reproductionRate + delta);
+                int newRepro = stats.reproductionRate + delta;
+                if (newRepro >= baseData.reproductionRate)
+                {
+                    stats.reproductionRate = newRepro;
+                    changed = true;
+                }
                 break;
+
             case "velocity":
-                stats.velocity = Mathf.Max(baseData.velocity, stats.velocity + delta);
+                float newVel = stats.velocity + delta;
+                if (newVel >= baseData.velocity)
+                {
+                    stats.velocity = newVel;
+                    changed = true;
+                }
                 break;
 
             case "strength":
                 if (baseData is WhiteBloodCellData wbc)
-                    stats.strength = Mathf.Max(wbc.strength, stats.strength + delta);
+                {
+                    int newStr = stats.strength + delta;
+                    if (newStr >= wbc.strength)
+                    {
+                        stats.strength = newStr;
+                        changed = true;
+                    }
+                }
                 else if (baseData is VirusData virus)
-                    stats.strength = Mathf.Max(virus.strength, stats.strength + delta);
+                {
+                    int newStr = stats.strength + delta;
+                    if (newStr >= virus.strength)
+                    {
+                        stats.strength = newStr;
+                        changed = true;
+                    }
+                }
                 break;
         }
 
-        OnStatsChanged?.Invoke(entityType, stats);
-    }
+        if (changed)
+            OnStatsChanged?.Invoke(entityType, stats);
 
+        return changed;
+    }
 
     public void StartSpawning()
     {
@@ -174,6 +215,6 @@ public class CellSpawnerScript : MonoBehaviour
         foreach (var cell in activeCells)
             if (cell != null) cell.SetActive(false);
         activeCells.Clear();
-        StartSpawning();
     }
+
 }
