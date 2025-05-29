@@ -67,6 +67,17 @@ public class CountBoardScript : MonoBehaviour
         UpdateUI();
     }
 
+    public void ResetCounts()
+    {
+        virusCount = 0;
+        redBloodCellCount = 0;
+        infectedRedBloodCellCount = 0;
+        whiteBloodCellCount = 0;
+
+        UpdateUI();
+    }
+
+
     private void UpdateUI()
     {
         if (virusText != null)

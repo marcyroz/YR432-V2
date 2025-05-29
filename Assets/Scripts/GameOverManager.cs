@@ -50,4 +50,12 @@ public class GameOverManager : MonoBehaviour
         return animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 &&
                !animator.IsInTransition(0);
     }
+
+    public void EndGameOverCycle()
+    {
+        gameOverScreen.SetActive(false);
+        animationPanel.SetActive(true);
+        gameOverTextPanel.SetActive(false);
+        statsPanel.SetActive(false);
+    }
 }
