@@ -32,9 +32,19 @@ public class CellSpawnerScript : MonoBehaviour
         }
     }
 
+    // Retorna o CellData de um tipo (ex.: "Virus", "RBC" etc.)
+    public CellData GetBaseData(string entityType)
+    {
+        var entry = cellTypes.Find(c => c.baseData.entityType == entityType);
+        return entry?.baseData;
+    }
+
+    // Retorna o CellStats modificado de um tipo
     public CellStats GetStatsFor(string entityType)
     {
-        return modifiedStats[entityType];
+        if (modifiedStats.TryGetValue(entityType, out var stats))
+            return stats;
+        return null;
     }
 
     public void ModifyStat(string entityType, string statName, int delta)

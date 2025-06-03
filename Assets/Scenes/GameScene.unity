@@ -9685,7 +9685,7 @@ MonoBehaviour:
   pools:
   - tag: Virus
     prefab: {fileID: 4315808051615239576, guid: f569cb4b0d0432447beda47bf027ed85, type: 3}
-    size: 10
+    size: 1
   - tag: WBC
     prefab: {fileID: 9099699829418982766, guid: fe631b5429faac5449c530963d2f1d8e, type: 3}
     size: 1
@@ -15348,6 +15348,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageInterval: 3
+  infectionInterval: 3
+  conversionDelay: 4
 --- !u!4 &1369330512
 Transform:
   m_ObjectHideFlags: 0
