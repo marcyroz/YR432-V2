@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: RBCData
   m_EditorClassIdentifier: 
   entityType: RBC
-  health: 18
+  health: 10
   resistance: 6
   reproductionRate: 10
   velocity: 5
-  infected: 0
+  infected: 1

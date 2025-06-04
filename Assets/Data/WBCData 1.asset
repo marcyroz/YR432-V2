@@ -17,4 +17,4 @@ MonoBehaviour:
   resistance: 15
   reproductionRate: 8
   velocity: 5
-  strength: 1
+  strength: 5
