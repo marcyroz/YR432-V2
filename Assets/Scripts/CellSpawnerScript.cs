@@ -47,50 +47,85 @@ public class CellSpawnerScript : MonoBehaviour
         return null;
     }
 
-    public void ModifyStat(string entityType, string statName, int delta)
+    public bool ModifyStat(string entityType, string statName, int delta)
     {
-        if (!modifiedStats.ContainsKey(entityType)) return;
+        if (!modifiedStats.ContainsKey(entityType)) return false;
 
         CellStats stats = modifiedStats[entityType];
         CellData baseData = cellTypes.Find(c => c.baseData.entityType == entityType).baseData;
 
+        bool changed = false;
+
         switch (statName)
         {
             case "health":
-                stats.health = Mathf.Max(baseData.health, stats.health + delta);
+                int newHealth = stats.health + delta;
+                if (newHealth >= baseData.health)
+                {
+                    stats.health = newHealth;
+                    changed = true;
+                }
                 break;
+
             case "resistance":
-                stats.resistance = Mathf.Max(baseData.resistance, stats.resistance + delta);
+                int newRes = stats.resistance + delta;
+                if (newRes >= baseData.resistance)
+                {
+                    stats.resistance = newRes;
+                    changed = true;
+                }
                 break;
+
             case "reproductionRate":
-                stats.reproductionRate = Mathf.Max(baseData.reproductionRate, stats.reproductionRate + delta);
+                int newRepro = stats.reproductionRate + delta;
+                if (newRepro >= baseData.reproductionRate)
+                {
+                    stats.reproductionRate = newRepro;
+                    changed = true;
+                }
                 break;
+
             case "velocity":
-                stats.velocity = Mathf.Max(baseData.velocity, stats.velocity + delta);
+                float newVel = stats.velocity + delta;
+                if (newVel >= baseData.velocity)
+                {
+                    stats.velocity = newVel;
+                    changed = true;
+                }
                 break;
 
             case "strength":
                 if (baseData is WhiteBloodCellData wbc)
-                    stats.strength = Mathf.Max(wbc.strength, stats.strength + delta);
+                {
+                    int newStr = stats.strength + delta;
+                    if (newStr >= wbc.strength)
+                    {
+                        stats.strength = newStr;
+                        changed = true;
+                    }
+                }
                 else if (baseData is VirusData virus)
-                    stats.strength = Mathf.Max(virus.strength, stats.strength + delta);
-                break;
-
-            case "infected":
-                if (baseData is RedBloodCellData)
-                    stats.infected = !stats.infected; // Alterna true/false
+                {
+                    int newStr = stats.strength + delta;
+                    if (newStr >= virus.strength)
+                    {
+                        stats.strength = newStr;
+                        changed = true;
+                    }
+                }
                 break;
         }
 
-        OnStatsChanged?.Invoke(entityType, stats);
-    }
+        if (changed)
+            OnStatsChanged?.Invoke(entityType, stats);
 
+        return changed;
+    }
 
     public void StartSpawning()
     {
-        if (isSpawning) return;
-        isSpawning = true;
-        StopSpawning();
+        StopSpawning();          // ← Primeiro para qualquer loop anterior
+        isSpawning = true;       // ← Agora ativa o novo ciclo
 
         foreach (var cellData in cellTypes)
             spawnCoroutines.Add(StartCoroutine(SpawnLoop(cellData)));
@@ -110,10 +145,9 @@ public class CellSpawnerScript : MonoBehaviour
 
     private IEnumerator SpawnLoop(CellSpawnData cellData)
     {
-        // float interval = 20f / Mathf.Max(1, cellData.baseData.reproductionRate);
         yield return new WaitForSeconds(1f);
 
-        while (true)
+        while (isSpawning) // ✅ checagem da flag
         {
             float interval = 20f / Mathf.Max(1, modifiedStats[cellData.baseData.entityType].reproductionRate);
 
@@ -138,33 +172,26 @@ public class CellSpawnerScript : MonoBehaviour
                     //     $"Forca={stats.strength}, " +
                     //     $"Infectada={stats.infected}");
                 }
-                // 1) Inicializa CellScript
-                // cell.GetComponent<CellScript>()?.Initialize(cellData.baseData);
+
                 activeCells.Add(cell);
 
-                // 2) Se tiver AIAgent, configure targetType e moveSpeed
                 var agent = cell.GetComponent<AIAgent>();
                 if (agent != null)
                 {
-                    // velocity vem do CellData
                     agent.moveSpeed = modifiedStats[cellData.baseData.entityType].velocity;
 
-                    // targetType (enum) define quem perseguir
-                    // mapeando a string data.entityType para o enum
                     if (cellData.baseData.entityType == "Virus")
-                        agent.targetType = EntityType.RBC; // Vírus persegue RBC
+                        agent.targetType = EntityType.RBC;
                     else if (cellData.baseData.entityType == "WBC")
-                        agent.targetType = EntityType.Virus; // WBC persegue Vírus
+                        agent.targetType = EntityType.Virus;
                     else if (cellData.baseData.entityType == "RBC")
-                        agent.targetType = EntityType.Wander;  // RBC vagueia
-                    // adicione outros mapeamentos conforme necessário
+                        agent.targetType = EntityType.Wander;
                 }
             }
 
             CleanupList();
             yield return new WaitForSeconds(interval);
         }
-
     }
 
     private Vector3 GetValidSpawnPosition()
@@ -207,6 +234,6 @@ public class CellSpawnerScript : MonoBehaviour
         foreach (var cell in activeCells)
             if (cell != null) cell.SetActive(false);
         activeCells.Clear();
-        StartSpawning();
     }
+
 }
