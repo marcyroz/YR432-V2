@@ -8,6 +8,7 @@ public class GameOverManager : MonoBehaviour
     [SerializeField] private GameObject animationPanel;
     [SerializeField] private GameObject gameOverTextPanel;
     [SerializeField] private GameObject statsPanel;
+    [SerializeField] private GameCountBoardScript statsPanelBoardScript;
 
     [Header("Timing")]
     [SerializeField] private float delayAfterAnimation = 1f;
@@ -43,6 +44,7 @@ public class GameOverManager : MonoBehaviour
 
         // 5. Mostra o painel de estatísticas
         statsPanel.SetActive(true);
+        statsPanelBoardScript.RefreshBoard();
     }
 
     private bool AnimationFinished()

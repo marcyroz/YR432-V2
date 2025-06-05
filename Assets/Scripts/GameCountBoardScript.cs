@@ -12,9 +12,19 @@ public class GameCountBoardScript : MonoBehaviour
 
     void Start()
     {
+        RefreshBoard();
+    }
+
+    public void RefreshBoard()
+    {
+
         var stats = GameStatsTracker.Instance;
 
-        if (stats == null) return;
+        if (stats == null)
+        {
+            Debug.LogError("GameStatsTracker.Instance está null no RefreshBoard");
+            return;
+        }
 
         virusKilledText.text = stats.virusKilled.ToString();
         wbcKilledText.text = stats.wbcKilled.ToString();
@@ -22,5 +32,10 @@ public class GameCountBoardScript : MonoBehaviour
         rbcInfectedText.text = stats.rbcInfected.ToString();
         rbcCuredText.text = stats.rbcCured.ToString();
         totalCellsBornText.text = stats.totalCellsBorn.ToString();
+
+        Debug.Log(
+            $"Stats Updated: Virus Killed: {stats.virusKilled}, WBC Killed: {stats.wbcKilled}, RBC Transformed: {stats.rbcTransformed}, RBC Infected: {stats.rbcInfected}, RBC Cured: {stats.rbcCured}, Total Cells Born: {stats.totalCellsBorn}"
+        );
     }
+
 }

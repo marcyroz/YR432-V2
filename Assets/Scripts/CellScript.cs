@@ -11,10 +11,10 @@ public class CellScript : MonoBehaviour
     [HideInInspector] public int reproductionRate;
     [HideInInspector] public float velocity;
 
-    // Flag para saber se esta instância de RBC foi infectada
     [HideInInspector] public bool isInfectedInstance = false;
 
     private Coroutine lifetimeCoroutine;
+    private bool wasKilled = false;
 
     public void Initialize(CellData data, CellStats stats)
     {
@@ -25,14 +25,14 @@ public class CellScript : MonoBehaviour
         velocity = stats.velocity;
 
         isInfectedInstance = false;
+        wasKilled = false; // Reset ao inicializar
 
-        // Se for um WBC, começa o ciclo de vida baseado em saúde + resistência
         if (cellData.entityType == "WBC")
         {
             if (lifetimeCoroutine != null)
                 StopCoroutine(lifetimeCoroutine);
 
-            float lifeTime = health + resistance; // Tempo em segundos
+            float lifeTime = health + resistance;
             lifetimeCoroutine = StartCoroutine(LifeCycleTimer(lifeTime));
         }
     }
@@ -41,33 +41,27 @@ public class CellScript : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
 
-        // Mata a célula se ainda estiver ativa
         if (gameObject.activeInHierarchy)
         {
+            wasKilled = true; // Considera como morte natural
             gameObject.SetActive(false);
         }
     }
 
     void OnEnable()
     {
-        // Sempre adiciona o próprio cellData.entityType (ex.: "RBC", "Virus" ou "WBC")
         if (countBoard != null && cellData != null)
             countBoard.addEntity(cellData.entityType);
-
-        if (GameStatsTracker.Instance != null && cellData != null)
-            GameStatsTracker.Instance.RegisterCellBorn(cellData.entityType);
     }
 
     void OnDisable()
     {
-        // Para o ciclo de vida se estiver em execução
         if (lifetimeCoroutine != null)
         {
             StopCoroutine(lifetimeCoroutine);
             lifetimeCoroutine = null;
         }
 
-        // Lógica de contagem
         if (countBoard != null && cellData != null)
         {
             if (cellData.entityType == "RBC" && isInfectedInstance)
@@ -77,11 +71,19 @@ public class CellScript : MonoBehaviour
             else
             {
                 countBoard.removeEntity(cellData.entityType);
+
+                if (cellData.entityType == "Virus")
+                {
+                    GameStatsTracker.Instance?.RegisterCellDeath("Virus");
+                }
+                else if (cellData.entityType == "WBC" && wasKilled)
+                {
+                    GameStatsTracker.Instance?.RegisterCellDeath("WBC");
+                }
             }
         }
 
-        if (GameStatsTracker.Instance != null && cellData != null)
-            GameStatsTracker.Instance.RegisterCellDeath(cellData.entityType);
+        wasKilled = false; // Reset para uso futuro
     }
 
     public void TakeDamage(int damage)
@@ -89,8 +91,7 @@ public class CellScript : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            // Quando a vida chega a zero, simplesmente desativa o objeto
-            // → Isso vai chamar OnDisable() e removerá “IRBC” ou “RBC” conforme o caso.
+            wasKilled = true;
             gameObject.SetActive(false);
         }
     }
