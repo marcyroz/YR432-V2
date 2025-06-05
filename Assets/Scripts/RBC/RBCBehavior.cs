@@ -15,6 +15,13 @@ public class RBCBehavior : MonoBehaviour
         originalSprite = rend.sprite;
     }
 
+    void OnEnable()
+    {
+        // Toda vez que a pool reativa este objeto,
+        // voltamos ao sprite “saudável” original.
+        rend.sprite = originalSprite;
+    }
+
     /// <summary>
     /// Chame para marcar visualmente este RBC como infectado.
     /// </summary>

@@ -173,10 +173,11 @@ public class GameCollisionManager : MonoBehaviour
     // ==============================================
     private void ProcessInfectionTicks()
     {
+        // Pegamos todos os pares atuais de “vírus→rbc” que estão drenando vida
         var keys = new List<InfectionPair>(infectionTimers.Keys);
         foreach (var pair in keys)
         {
-            // 1) Se algum GameObject foi destruído/desativado, limpe
+            // 1) Se algum GameObject foi destruído ou ficou inativo, removemos o par
             if (!pair.virus || !pair.rbc ||
                 !pair.virus.activeInHierarchy ||
                 !pair.rbc.activeInHierarchy)
@@ -185,53 +186,64 @@ public class GameCollisionManager : MonoBehaviour
                 continue;
             }
 
-            // 2) Acumula tempo até o próximo tick de “dreno de vida”
+            // 2) Já recuperamos o CellScript do RBC para checar se já está infectado
+            var rbcScript = pair.rbc.GetComponent<CellScript>();
+            if (rbcScript == null)
+            {
+                infectionTimers.Remove(pair);
+                continue;
+            }
+
+            // não deixamos ele “infectar” novamente. Só descartamos este par.
+            if (rbcScript.isInfectedInstance)
+            {
+                infectionTimers.Remove(pair);
+                continue;
+            }
+
+            // 3) Acumulamos tempo até o próximo tick de “dreno de vida”
             infectionTimers[pair] += Time.deltaTime;
 
             if (infectionTimers[pair] >= infectionInterval)
             {
-                // 3) Recupera strength do Vírus via CellScript
+                // 4) Recupera strength do Vírus via CellScript (quem está infectando)
                 var virusScript = pair.virus.GetComponent<CellScript>();
                 int baseDamage = 0;
                 if (virusScript?.cellData is VirusData vData)
                     baseDamage = vData.strength;
 
-                // 4) Aplica dano mitigado ao RBC, mas **sem chamar TakeDamage()**
-                var rbcScript = pair.rbc.GetComponent<CellScript>();
-                if (rbcScript != null)
+                // 5) Agora aplicamos dano mitigado ao RBC manualmente (sem TakeDamage())
+                int resistance = rbcScript.resistance;
+                float factor = 100f / (100f + resistance);
+                float rawDamageF = baseDamage * factor;
+                int effectiveDamage = Mathf.FloorToInt(rawDamageF);
+
+                int beforeHealth = rbcScript.health;
+                rbcScript.health -= effectiveDamage;
+                int afterHealth = rbcScript.health;
+
+                Debug.Log(
+                    $"Vírus aplicou {effectiveDamage} dmg ao RBC  " +
+                    $"(bruto {baseDamage}, res {resistance}, raw {rawDamageF:F2})  " +
+                    $"— Vida: {beforeHealth} → {afterHealth}"
+                );
+
+                // 6) Se o RBC ainda tiver vida (>0), subtraímos só o intervalo e aguardamos o próximo tick
+                if (afterHealth > 0)
                 {
-                    int resistance = rbcScript.resistance;
-                    float factor = 100f / (100f + resistance);
-                    float rawDamageF = baseDamage * factor;
-                    int effectiveDamage = Mathf.FloorToInt(rawDamageF);
-
-                    // em vez de `rbcScript.TakeDamage(effectiveDamage);`:
-                    int beforeHealth = rbcScript.health;
-                    rbcScript.health -= effectiveDamage; // subtrai manualmente
-                    int afterHealth = rbcScript.health;
-
-                    Debug.Log(
-                        $"Vírus aplicou {effectiveDamage} dmg ao RBC  " +
-                        $"(bruto {baseDamage}, res {resistance}, raw {rawDamageF:F2})  " +
-                        $"— Vida: {beforeHealth} → {afterHealth}"
-                    );
-
-                    // 5) Se o RBC ainda tiver vida (>0), reduz somente o timer e aguarda o próximo tick
-                    if (afterHealth > 0)
-                    {
-                        infectionTimers[pair] -= infectionInterval;
-                        continue;
-                    }
-
-                    // 6) Quando a vida chega a zero (ou menos), “infectamos de vez” chamando InfectRBC
-                    InfectRBC(pair.rbc);
+                    infectionTimers[pair] -= infectionInterval;
+                    continue;
                 }
 
-                // 7) Remove a entrada para não drenar de novo
+                // 7) Quando a vida chega a zero (ou menos), “infectamos de vez” chamando InfectRBC()
+                InfectRBC(pair.rbc);
+
+                // 8) Removemos este par para não drenar de novo
                 infectionTimers.Remove(pair);
             }
         }
     }
+
 
 
 
@@ -244,56 +256,63 @@ public class GameCollisionManager : MonoBehaviour
         var cellScript = rbcObj.GetComponent<CellScript>();
         if (cellScript == null) return;
 
-        // 1) NÃO alteramos o `cellData.infected` (ScriptableObject) aqui,
-        //    pois marcaria todos os novos RBCs como “infectados”.
-        //    Apenas trocamos o sprite desta instância:
+        // 0) Dizemos que esta instância virou um IRBC
+        cellScript.isInfectedInstance = true;
+
+        // 1) Remove um “RBC” do CountBoard e adiciona “IRBC”
+        if (CellScript.countBoard != null)
+        {
+            CellScript.countBoard.removeEntity("RBC");
+            CellScript.countBoard.addEntity("IRBC");
+        }
+
+        // 2) Muda o sprite para infectado
         var rbcBehavior = rbcObj.GetComponent<RBCBehavior>();
         if (rbcBehavior != null)
             rbcBehavior.Infect();
 
         Debug.Log($"RBC {rbcObj.name} foi infectado (HP ≤ 0) pelo Vírus!");
 
-        // 2) Remove de RBCTracker (para que não seja alvo de pathfinding)
+        // 3) Para de ser alvo de pathfinding
         RBCTracker.AllRBCs.Remove(rbcObj.transform);
 
-        // 3) Inicia coroutine que converte este RBC em Vírus após ‘conversionDelay’
+        // 4) Agendamos a conversão em Vírus após o delay
         StartCoroutine(ConvertRBCtoVirus(rbcObj));
     }
-
-
 
     private IEnumerator ConvertRBCtoVirus(GameObject rbcObj)
     {
         yield return new WaitForSeconds(conversionDelay);
 
         if (rbcObj == null || !rbcObj.activeInHierarchy)
-            yield break; // já foi desativado ou destruído
+            yield break;
 
-        // Guarda posição para spawnar o vírus
+        // Guarda a posição para spawnar o vírus
         Vector3 pos = rbcObj.transform.position;
 
-        // 1) Desativa o RBC atual (devolve à pool)
+        // 1) Desativa o próprio RBC infectado.
+        //    Como isInfectedInstance == true e cellData.entityType == "RBC",
+        //    o OnDisable de CellScript removerá exatamente um “IRBC” do painel.
         rbcObj.SetActive(false);
         Debug.Log($"RBC {rbcObj.name} agora será convertido em Vírus.");
 
-        // 2) Spawnar um novo Vírus na mesma posição
-        //    Supondo que a pool use a tag “Virus” para o prefab do vírus
+        // 2) Spawn do novo Vírus no mesmo lugar (permitindo expansão da pool)
         GameObject newVirus = ObjectPooler.Instance.SpawnFromPool(
             "Virus",
             pos,
             Quaternion.identity,
-            true
+            true   // permite expandir além do size original
         );
 
         if (newVirus != null)
         {
-            // 2.1 Obtenha os dados e stats desejados para o novo vírus
+            // 2.1) Inicializa CellScript do novo Virus
             CellData virusData = spawner.GetBaseData("Virus");
             CellStats virusStats = spawner.GetStatsFor("Virus");
             var newScript = newVirus.GetComponent<CellScript>();
             newScript?.Initialize(virusData, virusStats);
 
-            // 2.2 Atualize o AIAgent do novo vírus, se houver
+            // 2.2) Atualiza o AIAgent, se houver
             var agent = newVirus.GetComponent<AIAgent>();
             if (agent != null)
             {
@@ -308,4 +327,5 @@ public class GameCollisionManager : MonoBehaviour
             Debug.LogWarning("Falha ao spawnar o novo Vírus da pool.");
         }
     }
+
 }
