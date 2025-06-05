@@ -237,6 +237,7 @@ public class GameCollisionManager : MonoBehaviour
 
                 // 7) Quando a vida chega a zero (ou menos), “infectamos de vez” chamando InfectRBC()
                 InfectRBC(pair.rbc);
+                GameStatsTracker.Instance?.RegisterInfection();
 
                 // 8) Removemos este par para não drenar de novo
                 infectionTimers.Remove(pair);
@@ -295,6 +296,7 @@ public class GameCollisionManager : MonoBehaviour
         //    o OnDisable de CellScript removerá exatamente um “IRBC” do painel.
         rbcObj.SetActive(false);
         Debug.Log($"RBC {rbcObj.name} agora será convertido em Vírus.");
+        GameStatsTracker.Instance?.RegisterTransformation();
 
         // 2) Spawn do novo Vírus no mesmo lugar (permitindo expansão da pool)
         GameObject newVirus = ObjectPooler.Instance.SpawnFromPool(

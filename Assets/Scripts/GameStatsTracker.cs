@@ -14,9 +14,15 @@ public class GameStatsTracker : MonoBehaviour
     void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            Debug.Log("GameStatsTracker inicializado com sucesso.");
+        }
         else
+        {
+            Debug.LogWarning("GameStatsTracker duplicado detectado e destruído.");
             Destroy(gameObject);
+        }
     }
 
     public void RegisterCellBorn(string entityType)

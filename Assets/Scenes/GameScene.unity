@@ -5067,6 +5067,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 402321856}
   m_CullTransparentMesh: 1
+--- !u!1 &404977789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 404977791}
+  - component: {fileID: 404977790}
+  m_Layer: 0
+  m_Name: Game Stats Tracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &404977790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404977789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4ecac5bbac11945a755b4ee8459879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virusKilled: 0
+  wbcKilled: 0
+  rbcTransformed: 0
+  rbcInfected: 0
+  rbcCured: 0
+  totalCellsBorn: 0
+--- !u!4 &404977791
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404977789}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 984.6454, y: 494.3411, z: 3.984884}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &413883523
 GameObject:
   m_ObjectHideFlags: 0
@@ -10424,7 +10474,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1880291355}
         m_TargetAssemblyTypeName: GameCtrScript, NewAssembly
-        m_MethodName: GameOver
+        m_MethodName: GoodEnding
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12054,6 +12104,7 @@ MonoBehaviour:
   goodEndingScreen: {fileID: 722646963}
   delayAfterImage: 7
   statsPanel: {fileID: 970563262}
+  statsPanelBoardScript: {fileID: 1455203629}
 --- !u!1 &1029572190
 GameObject:
   m_ObjectHideFlags: 0
@@ -12718,7 +12769,7 @@ GameObject:
   - component: {fileID: 1064796953}
   - component: {fileID: 1064796952}
   m_Layer: 0
-  m_Name: Game Count Board Manager
+  m_Name: Game Over Count Board Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18717,6 +18768,7 @@ MonoBehaviour:
   animationPanel: {fileID: 1787798648}
   gameOverTextPanel: {fileID: 18893571}
   statsPanel: {fileID: 390651935}
+  statsPanelBoardScript: {fileID: 1064796952}
   delayAfterAnimation: 1
   delayAfterText: 5
   animator: {fileID: 1787798650}
@@ -19220,6 +19272,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1448995567}
   m_CullTransparentMesh: 1
+--- !u!1 &1455203628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1455203630}
+  - component: {fileID: 1455203629}
+  m_Layer: 0
+  m_Name: Good Ending Count Board Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1455203629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455203628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4802412796c2b4fa85bbb39be995e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virusKilledText: {fileID: 1843880279}
+  wbcKilledText: {fileID: 1494776545}
+  rbcTransformedText: {fileID: 183843213}
+  rbcInfectedText: {fileID: 1806412737}
+  rbcCuredText: {fileID: 839965541}
+  totalCellsBornText: {fileID: 790282895}
+--- !u!4 &1455203630
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455203628}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 984.6454, y: 494.3411, z: 3.984884}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1458443903
 GameObject:
   m_ObjectHideFlags: 0
@@ -27497,6 +27599,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2028241097}
   m_CullTransparentMesh: 1
+--- !u!1 &2029538910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2029538912}
+  - component: {fileID: 2029538911}
+  m_Layer: 0
+  m_Name: Game Rules Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2029538911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029538910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea89e4a63c1f7a429a6f1387d7f868b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2029538912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029538910}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 984.6454, y: 494.3411, z: 3.984884}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2034335799
 GameObject:
   m_ObjectHideFlags: 0
@@ -28855,3 +29001,6 @@ SceneRoots:
   - {fileID: 843856146}
   - {fileID: 1369330512}
   - {fileID: 1064796953}
+  - {fileID: 1455203630}
+  - {fileID: 404977791}
+  - {fileID: 2029538912}

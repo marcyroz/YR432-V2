@@ -7,6 +7,8 @@ public class GoodEndingManager : MonoBehaviour
     [SerializeField] private float delayAfterImage = 7f;
     [SerializeField] private GameObject statsPanel;
 
+    [SerializeField] private GameCountBoardScript statsPanelBoardScript;
+
     public void StartGoodEndingCycle()
     {
         goodEndingScreen.SetActive(true);
@@ -17,6 +19,7 @@ public class GoodEndingManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delayAfterImage);
         statsPanel.SetActive(true);
+        statsPanelBoardScript.RefreshBoard();
     }
 
     public void EndGoodEndingCycle()

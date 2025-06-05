@@ -162,6 +162,9 @@ public class CellSpawnerScript : MonoBehaviour
                     CellStats stats = modifiedStats[cellData.baseData.entityType];
                     script.Initialize(cellData.baseData, stats);
 
+                    if (GameStatsTracker.Instance != null)
+                        GameStatsTracker.Instance.RegisterCellBorn(cellData.baseData.entityType);
+
                     // DEBUG: Mostrar as propriedades completas
                     // Debug.Log(
                     //     $"Nova {cellData.baseData.entityType} criada com stats: " +
