@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CellScript : MonoBehaviour
@@ -13,6 +14,8 @@ public class CellScript : MonoBehaviour
     // Flag para saber se esta instância de RBC foi infectada
     [HideInInspector] public bool isInfectedInstance = false;
 
+    private Coroutine lifetimeCoroutine;
+
     public void Initialize(CellData data, CellStats stats)
     {
         cellData = data;
@@ -21,8 +24,28 @@ public class CellScript : MonoBehaviour
         reproductionRate = stats.reproductionRate;
         velocity = stats.velocity;
 
-        // Toda vez que a pool (re)ativa este objeto, ele começa NÃO infectado
         isInfectedInstance = false;
+
+        // Se for um WBC, começa o ciclo de vida baseado em saúde + resistência
+        if (cellData.entityType == "WBC")
+        {
+            if (lifetimeCoroutine != null)
+                StopCoroutine(lifetimeCoroutine);
+
+            float lifeTime = health + resistance; // Tempo em segundos
+            lifetimeCoroutine = StartCoroutine(LifeCycleTimer(lifeTime));
+        }
+    }
+
+    private IEnumerator LifeCycleTimer(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        // Mata a célula se ainda estiver ativa
+        if (gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     void OnEnable()
@@ -37,10 +60,16 @@ public class CellScript : MonoBehaviour
 
     void OnDisable()
     {
+        // Para o ciclo de vida se estiver em execução
+        if (lifetimeCoroutine != null)
+        {
+            StopCoroutine(lifetimeCoroutine);
+            lifetimeCoroutine = null;
+        }
+
+        // Lógica de contagem
         if (countBoard != null && cellData != null)
         {
-            // Se for um RBC que já foi marcado como infectado nesta instância,
-            // removemos "IRBC". Caso contrário, removemos somente o próprio tipo original.
             if (cellData.entityType == "RBC" && isInfectedInstance)
             {
                 countBoard.removeEntity("IRBC");

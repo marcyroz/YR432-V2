@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: VirusData
   m_EditorClassIdentifier: 
   entityType: Virus
-  health: 60
-  resistance: 100
+  health: 6
+  resistance: 10
   reproductionRate: 4
   velocity: 10
   strength: 10

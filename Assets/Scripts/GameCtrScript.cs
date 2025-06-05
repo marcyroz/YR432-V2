@@ -35,7 +35,8 @@ public class GameCtrScript : MonoBehaviour
         gameOverManager.StartGameOverCycle();
         musicManager.PlayGameOverMusic();
         countdown.StopCountdownCycle();
-        cellSpawner.StopSpawning();
+        cellSpawner.ResetSpawning();
+
 
     }
 
@@ -44,7 +45,7 @@ public class GameCtrScript : MonoBehaviour
         goodEndingManager.StartGoodEndingCycle();
         musicManager.PlayGoodEndingMusic();
         countdown.StopCountdownCycle();
-        cellSpawner.StopSpawning();
+        cellSpawner.ResetSpawning();
     }
 
     public void PauseSpawns()
