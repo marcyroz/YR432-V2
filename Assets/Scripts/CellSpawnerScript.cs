@@ -231,12 +231,34 @@ public class CellSpawnerScript : MonoBehaviour
         activeCells.RemoveAll(c => c == null || !c.activeInHierarchy);
     }
 
+    public void RegisterExternalSpawn(GameObject cell)
+    {
+        if (cell != null && !activeCells.Contains(cell))
+            activeCells.Add(cell);
+    }
+
     public void ResetSpawning()
     {
         StopSpawning();
         foreach (var cell in activeCells)
             if (cell != null) cell.SetActive(false);
         activeCells.Clear();
+    }
+
+    public void ResetStats()
+    {
+        modifiedStats.Clear();
+
+        foreach (var cell in cellTypes)
+        {
+            modifiedStats[cell.baseData.entityType] = new CellStats(cell.baseData);
+        }
+
+        // Notifica qualquer listener que os stats foram resetados
+        foreach (var kvp in modifiedStats)
+        {
+            OnStatsChanged?.Invoke(kvp.Key, kvp.Value);
+        }
     }
 
 }

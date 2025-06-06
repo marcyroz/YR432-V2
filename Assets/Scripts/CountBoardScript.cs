@@ -93,4 +93,9 @@ public class CountBoardScript : MonoBehaviour
             whiteBloodCellText.text = whiteBloodCellCount.ToString();
     }
 
+    public int VirusCount => virusCount;
+    public int WhiteBloodCellCount => whiteBloodCellCount;
+    public int RedBloodCellCount => redBloodCellCount;
+    public int InfectedRedBloodCellCount => infectedRedBloodCellCount;
+
 }
