@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityType: Virus
   health: 6
-  resistance: 10
+  resistance: 3
   reproductionRate: 4
   velocity: 10
-  strength: 10
+  strength: 7

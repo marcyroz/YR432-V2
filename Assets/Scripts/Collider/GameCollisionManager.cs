@@ -306,6 +306,8 @@ public class GameCollisionManager : MonoBehaviour
             true   // permite expandir além do size original
         );
 
+        spawner.RegisterExternalSpawn(newVirus);
+
         if (newVirus != null)
         {
             // 2.1) Inicializa CellScript do novo Virus

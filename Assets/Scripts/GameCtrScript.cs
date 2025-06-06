@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameCtrScript : MonoBehaviour
 {
@@ -10,19 +12,20 @@ public class GameCtrScript : MonoBehaviour
     [SerializeField] private MusicManager musicManager;
     [SerializeField] private CellSpawnerScript cellSpawner;
     [SerializeField] private StatsManagerScript statsManager;
+    [SerializeField] private DialogData introDialog;
 
     void Start()
     {
-        CellScript.countBoard = Object.FindFirstObjectByType<CountBoardScript>();
-        typewriter.OnDialogFinished.AddListener(OnDialogComplete);
-        typewriter.ActivateDialog();
-        statsManager.ResetDoses();
+        StartGame();
     }
 
-    private void OnDialogComplete()
+    void Update()
     {
-        cellSpawner.StartSpawning();
-        countdown.StartCountdownCycle();
+        if (Input.GetKeyDown(KeyCode.Escape) && !typewriter.IsDialogActive())
+        {
+            SceneManager.LoadScene("MenuScene");
+        }
+
     }
 
     public void PlaySound()
@@ -56,23 +59,40 @@ public class GameCtrScript : MonoBehaviour
         cellSpawner.StartSpawning();
     }
 
+    private IEnumerator StartSequence()
+    {
+        typewriter.PlayDialog(introDialog);
+
+        // Espera o diálogo de introdução acabar
+        while (typewriter.IsDialogActive())
+            yield return null;
+
+        statsManager.ResetDoses(); // reset após o diálogo, se preferir
+        cellSpawner.StartSpawning();
+        countdown.StartCountdownCycle();
+        countdown.ForceInitialRefill(); // agora sim
+    }
+
+    public void StartGame()
+    {
+        CellScript.countBoard = Object.FindFirstObjectByType<CountBoardScript>();
+        StartCoroutine(StartSequence());
+        // statsManager.ResetDoses();
+        // cellSpawner.StartSpawning();
+    }
+
     public void RestartGame()
     {
+        GameStatsTracker.Instance?.ResetStats();
         countdown.StopCountdownCycle();
-        cellSpawner.StopSpawning();
         gameOverManager.EndGameOverCycle();
         goodEndingManager.EndGoodEndingCycle();
-
         cellSpawner.ResetSpawning();
         CellScript.countBoard.ResetCounts();
-        typewriter.RestartDialog();
-        typewriter.OnDialogFinished.RemoveAllListeners();
-        typewriter.OnDialogFinished.AddListener(OnDialogComplete);
+        cellSpawner.ResetStats();
         musicManager.PlayGameMusic();
 
-        if (statsManager != null)
-            statsManager.ResetDoses();
+        StartGame();
 
-        Debug.Log("Jogo reiniciado com sucesso.");
     }
 }

@@ -17,6 +17,14 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    public void StopGameMusic()
+    {
+        if (musicSource.isPlaying)
+        {
+            musicSource.Stop();
+        }
+    }
+
     public void PlayGameOverMusic()
     {
         if (musicSource.clip != gameOverMusic)
