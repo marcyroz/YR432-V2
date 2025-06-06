@@ -27,8 +27,10 @@ Gerencie medicações, combata a infecção e tome decisões que podem levar à 
 
 ## 📦 Requisitos
 
-- [Unity Hub 3.12.1+](https://unity.com/download)
-- [Unity Editor 6.0.0 LTS](https://unity.com/releases/editor/whats-new/6-0-0)
+- unity hub 3.12.1
+- unity 6.0 LTS
+  
+- [Download](https://unity.com/releases/unity-6)
 
 ---
 
