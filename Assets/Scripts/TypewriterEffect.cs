@@ -1,36 +1,47 @@
 using System.Collections;
-using UnityEngine.Events;
+using UnityEngine.UI; // importante
 using UnityEngine;
 using TMPro;
 
 public class TypewriterEffect : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _textMeshPro;
-    [SerializeField] float normalCharDelay = 0.05f;
-    [SerializeField] float acceleratedCharDelay = 0.01f;
-    [SerializeField] float timeBtwWords = 0.5f;
-    [SerializeField] GameObject arrowIndicator;
-    [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip[] typingSounds;
-    [SerializeField] float minPitch = 0.95f;
-    [SerializeField] float maxPitch = 1.05f;
-    [SerializeField] float minSoundInterval = 0.03f;
-    [SerializeField] GameObject dialogWindow;
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI textMesh;
+    [SerializeField] private GameObject arrowIndicator;
+    [SerializeField] private GameObject dialogWindow;
 
-    private float lastSoundTime = 0f;
-    public string[] stringArray;
+    [Header("Portraits")]
+    [SerializeField] private Image portraitImage;
+    [SerializeField] private Sprite defaultPortrait;
+    [SerializeField] private Sprite blinkingPortrait;
+    [SerializeField] private Sprite happyPortrait;
+    [SerializeField] private Sprite preocupiedPortrait;
+    [SerializeField] private Sprite shockedPortrait;
+
+
+    [Header("Typewriter Settings")]
+    [SerializeField] private float normalCharDelay = 0.05f;
+    [SerializeField] private float acceleratedCharDelay = 0.01f;
+    [SerializeField] private float timeBtwWords = 0.5f;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] typingSounds;
+    [SerializeField] private float minPitch = 0.95f;
+    [SerializeField] private float maxPitch = 1.05f;
+    [SerializeField] private float minSoundInterval = 0.03f;
+
+    private DialogData currentDialog;
     private int index = -1;
     private bool isTyping = false;
     private bool accelerate = false;
     private Coroutine typingCoroutine;
-    public UnityEvent OnDialogFinished;
-
+    private float lastSoundTime = 0f;
 
     void Start()
     {
+        dialogWindow.SetActive(false);
         arrowIndicator.SetActive(false);
-        // Não chamamos NextLine aqui mais. A janela será ativada externamente via ActivateDialog
-        dialogWindow.SetActive(false); // Começa desativada
     }
 
     void Update()
@@ -40,9 +51,7 @@ public class TypewriterEffect : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isTyping)
-            {
                 accelerate = true;
-            }
             else
             {
                 arrowIndicator.SetActive(false);
@@ -51,55 +60,51 @@ public class TypewriterEffect : MonoBehaviour
         }
     }
 
-    [SerializeField] float delayBeforeStart = 0.5f; // tempo de espera antes de exibir o diálogo
-
-    public void ActivateDialog()
+    private Sprite GetPortraitForName(string name)
     {
-        StartCoroutine(ShowDialogAfterDelay());
+        switch (name.ToLower())
+        {
+            case "blinking":
+                return blinkingPortrait;
+            case "shocked":
+                return shockedPortrait;
+            case "happy":
+                return happyPortrait;
+            case "preoccupied":
+                return preocupiedPortrait;
+            case "default":
+            default:
+                return defaultPortrait;
+        }
     }
 
-    private IEnumerator ShowDialogAfterDelay()
+    public void PlayDialog(DialogData dialog)
     {
-        yield return new WaitForSeconds(delayBeforeStart);
+        if (dialog == null) return;
 
+        currentDialog = dialog;
         index = -1;
         dialogWindow.SetActive(true);
         arrowIndicator.SetActive(false);
+
+        portraitImage.sprite = GetPortraitForName(dialog.spriteName);
+
         NextLine();
-
-        Debug.Log("Mostrando diálogo...");
     }
 
-    public void RestartDialog()
-    {
-        if (typingCoroutine != null)
-        {
-            StopCoroutine(typingCoroutine);
-            typingCoroutine = null;
-        }
-
-        index = -1;
-        dialogWindow.SetActive(false);
-        _textMeshPro.text = string.Empty;
-        ActivateDialog();
-    }
-
-
-    void NextLine()
+    private void NextLine()
     {
         index++;
-        if (index < stringArray.Length)
+        if (currentDialog != null && index < currentDialog.lines.Length)
         {
-            if (typingCoroutine != null) StopCoroutine(typingCoroutine);
-            typingCoroutine = StartCoroutine(TextVisible(stringArray[index]));
+            if (typingCoroutine != null)
+                StopCoroutine(typingCoroutine);
+
+            typingCoroutine = StartCoroutine(TextVisible(currentDialog.lines[index]));
         }
         else
         {
-            Debug.Log("Fim das falas, Mestre Marcelly.");
-            arrowIndicator.SetActive(false);
-            dialogWindow.SetActive(false); // 💥 Aqui desativa a janela ao fim
-
-            OnDialogFinished?.Invoke(); // ✨ Evento disparado aqui!
+            EndDialog();
         }
     }
 
@@ -109,21 +114,20 @@ public class TypewriterEffect : MonoBehaviour
         accelerate = false;
         arrowIndicator.SetActive(false);
 
-        _textMeshPro.text = line;
-        _textMeshPro.ForceMeshUpdate();
+        textMesh.text = line;
+        textMesh.ForceMeshUpdate();
 
-        int totalVisibleCharacters = _textMeshPro.textInfo.characterCount;
+        int totalVisibleCharacters = textMesh.textInfo.characterCount;
         int counter = 0;
 
         while (counter <= totalVisibleCharacters)
         {
-            _textMeshPro.maxVisibleCharacters = counter;
+            textMesh.maxVisibleCharacters = counter;
             counter++;
 
             if (typingSounds.Length > 0 && audioSource && counter <= totalVisibleCharacters)
             {
-                char currentChar = _textMeshPro.text[Mathf.Clamp(counter - 1, 0, _textMeshPro.text.Length - 1)];
-
+                char currentChar = textMesh.text[Mathf.Clamp(counter - 1, 0, textMesh.text.Length - 1)];
                 if (char.IsLetterOrDigit(currentChar) && (Time.time - lastSoundTime >= minSoundInterval))
                 {
                     AudioClip clip = typingSounds[Random.Range(0, typingSounds.Length)];
@@ -140,5 +144,17 @@ public class TypewriterEffect : MonoBehaviour
         yield return new WaitForSeconds(timeBtwWords);
         isTyping = false;
         arrowIndicator.SetActive(true);
+    }
+
+    private void EndDialog()
+    {
+        dialogWindow.SetActive(false);
+        arrowIndicator.SetActive(false);
+        currentDialog = null;
+    }
+
+    public bool IsDialogActive()
+    {
+        return dialogWindow.activeSelf;
     }
 }

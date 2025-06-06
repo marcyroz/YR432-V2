@@ -7079,7 +7079,6 @@ RectTransform:
   - {fileID: 184252642}
   - {fileID: 722646964}
   - {fileID: 1164069850}
-  - {fileID: 861275510}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9402,7 +9401,6 @@ GameObject:
   - component: {fileID: 792025754}
   - component: {fileID: 792025756}
   - component: {fileID: 792025755}
-  - component: {fileID: 792025757}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -9467,28 +9465,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792025753}
   m_CullTransparentMesh: 1
---- !u!95 &792025757
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 792025753}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: df4b3f1d5f76cee4ebfa99e30a38fbc5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &798918680
 GameObject:
   m_ObjectHideFlags: 0
@@ -10373,7 +10349,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1732294424}
   statsManager: {fileID: 1722459655}
-  countdownDuration: 120
+  gameRules: {fileID: 2029538911}
+  gameController: {fileID: 0}
+  typewriter: {fileID: 1879924225}
+  HighDoseGoodDialog: {fileID: 11400000, guid: 79a78950c6473dd46a89375b00476b61, type: 2}
+  LowDoseGoodDialog: {fileID: 11400000, guid: 9e5d3b499c16c9d4da36e0157fcafb52, type: 2}
+  HighDoseBadDialog: {fileID: 11400000, guid: d223c629b328dab4f8f1878200ec1b76, type: 2}
+  LowDoseBadDialog: {fileID: 11400000, guid: 01f51f8f203550b4a9494664e0e63370, type: 2}
+  GoodEndingDialog: {fileID: 11400000, guid: f898aa83275889e41aaefe1c9a55f9f9, type: 2}
+  GameOverDialog: {fileID: 11400000, guid: d50f1808df0cde1419537b90f8bd09c5, type: 2}
+  countdownDuration: 60
+  musicManager: {fileID: 0}
 --- !u!4 &843856146
 Transform:
   m_ObjectHideFlags: 0
@@ -10389,139 +10375,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &861275509
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 861275510}
-  - component: {fileID: 861275513}
-  - component: {fileID: 861275512}
-  - component: {fileID: 861275511}
-  m_Layer: 5
-  m_Name: game over botao
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &861275510
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 861275509}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1158427883}
-  m_Father: {fileID: 597806434}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 70.061035, y: -76.345184}
-  m_SizeDelta: {x: 250.8314, y: 88.9177}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &861275511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 861275509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 861275512}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1880291355}
-        m_TargetAssemblyTypeName: GameCtrScript, NewAssembly
-        m_MethodName: GoodEnding
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &861275512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 861275509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &861275513
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 861275509}
-  m_CullTransparentMesh: 1
 --- !u!1 &904639354
 GameObject:
   m_ObjectHideFlags: 0
@@ -10814,7 +10667,7 @@ MonoBehaviour:
   pools:
   - tag: Virus
     prefab: {fileID: 4315808051615239576, guid: f569cb4b0d0432447beda47bf027ed85, type: 3}
-    size: 1
+    size: 300
   - tag: WBC
     prefab: {fileID: 9099699829418982766, guid: fe631b5429faac5449c530963d2f1d8e, type: 3}
     size: 300
@@ -14523,142 +14376,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1157068148}
   m_CullTransparentMesh: 1
---- !u!1 &1158427882
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1158427883}
-  - component: {fileID: 1158427885}
-  - component: {fileID: 1158427884}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1158427883
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158427882}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 861275510}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1158427884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158427882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: Button
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1158427885
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158427882}
-  m_CullTransparentMesh: 1
 --- !u!1 &1164069849
 GameObject:
   m_ObjectHideFlags: 0
@@ -14872,6 +14589,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1880291355}
+        m_TargetAssemblyTypeName: GameCtrScript, NewAssembly
+        m_MethodName: PlaySound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -15325,9 +15054,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Voce conseguira visualizar a quantidade de globulos brancos, globulos vermelhos
-    saudaveis e infectados e grupos virais. Os efeitos das medicacoes aplicadas sao
-    refletidos aqui.
+  m_text: 'Voce conseguira visualizar a quantidade de globulos brancos, globulos
+    vermelhos saudaveis e infectados e grupos virais. Os efeitos das medicacoes aplicadas
+    sao refletidos aqui.
+
+    Niveis recomendados para a alta do paciente:
+
+    Virus
+    - menos de 10 unidades
+
+    Globulos Vermelhos - 50 unidades
+
+    Globulos Brancos
+    - 10 unidades'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ed1e609d86117048bc4dff679527814, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: c2ac2bd5aac5d2b41825ac1fed7760f8, type: 2}
@@ -24891,7 +24630,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853254161}
-  m_LocalRotation: {x: -0, y: -0, z: 0.05926638, w: -0.9982422}
+  m_LocalRotation: {x: -0, y: -0, z: 0.019907301, w: -0.9998018}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -24901,10 +24640,10 @@ RectTransform:
   - {fileID: 775817223}
   - {fileID: 672756580}
   m_Father: {fileID: 1345905742}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -6.795}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.281}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15.5829, y: -29.7818}
+  m_AnchoredPosition: {x: -3.9999857, y: -188}
   m_SizeDelta: {x: 509.0223, y: 134.7187}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1853254163
@@ -25250,11 +24989,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8d0221596066645833fefc45ee88b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textMeshPro: {fileID: 813798103}
-  normalCharDelay: 0
-  acceleratedCharDelay: 0
-  timeBtwWords: 0
+  textMesh: {fileID: 813798103}
   arrowIndicator: {fileID: 2064937038}
+  dialogWindow: {fileID: 1140122656}
+  portraitImage: {fileID: 792025755}
+  defaultPortrait: {fileID: -4967039600337863157, guid: d1f647f4e44c7894ebeb5b65bba24542, type: 3}
+  blinkingPortrait: {fileID: -3950577101938772088, guid: 399cbaf96eb2d4d4f89cb15a6c60ea75, type: 3}
+  happyPortrait: {fileID: 8212243934860688624, guid: 6010949dfd9cf5341a38a02e8b965bfc, type: 3}
+  preocupiedPortrait: {fileID: 342125266448510365, guid: 4eb078ae46a97144a9b85865ff70b3a2, type: 3}
+  shockedPortrait: {fileID: -8889724304206743998, guid: 5412e69bb1ef9e94f857364b91d3d2bd, type: 3}
+  normalCharDelay: 0.05
+  acceleratedCharDelay: 0.01
+  timeBtwWords: 0.5
   audioSource: {fileID: 1879924224}
   typingSounds:
   - {fileID: 8300000, guid: 8a502195f3018704aa9714aaa4d425d8, type: 3}
@@ -25263,20 +25009,6 @@ MonoBehaviour:
   minPitch: 0.95
   maxPitch: 1.05
   minSoundInterval: 0.03
-  dialogWindow: {fileID: 1140122656}
-  stringArray:
-  - "Seja bem vindo! Serei sua supervisora no \xEDnicio da sua tragetoria aqui no
-    SUS. "
-  - 'Voce parece um pouco nervoso, mas nao se preocupe! Escolhemos um caso facil
-    para o seu primeiro plantao. '
-  - 'As informacoes do paciente estao no prontuario, bem como as instrucoes para
-    o seu primeiro dia de trabalho. '
-  - Irei passar aqui periodicamente para saber como esta, mas creio que se saira
-    muito bem. Boa sorte!
-  OnDialogFinished:
-    m_PersistentCalls:
-      m_Calls: []
-  delayBeforeStart: 0.5
 --- !u!224 &1879924226
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25333,6 +25065,7 @@ MonoBehaviour:
   musicManager: {fileID: 321567525}
   cellSpawner: {fileID: 221693196}
   statsManager: {fileID: 1722459655}
+  introDialog: {fileID: 11400000, guid: de7bb42d3cfc04d4288217b8aca99db3, type: 2}
 --- !u!4 &1880291356
 Transform:
   m_ObjectHideFlags: 0
@@ -27628,6 +27361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea89e4a63c1f7a429a6f1387d7f868b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countBoard: {fileID: 1557600044}
 --- !u!4 &2029538912
 Transform:
   m_ObjectHideFlags: 0

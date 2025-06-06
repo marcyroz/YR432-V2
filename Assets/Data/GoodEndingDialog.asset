@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc793d07e279b1141b9c3eb4d89091c7, type: 3}
-  m_Name: VirusData
+  m_Script: {fileID: 11500000, guid: e9b5c042612220b40ac2f30fe44195fc, type: 3}
+  m_Name: GoodEndingDialog
   m_EditorClassIdentifier: 
-  entityType: Virus
-  health: 6
-  resistance: 3
-  reproductionRate: 4
-  velocity: 10
-  strength: 7
+  lines:
+  - Parabens! Mais um paciente devidamente tratado.
+  - Esse sera o primeiro de muitos!
+  spriteName: happy
