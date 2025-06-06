@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameCtrScript : MonoBehaviour
 {
@@ -16,6 +17,15 @@ public class GameCtrScript : MonoBehaviour
     void Start()
     {
         StartGame();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !typewriter.IsDialogActive())
+        {
+            SceneManager.LoadScene("MenuScene");
+        }
+
     }
 
     public void PlaySound()
