@@ -40,11 +40,6 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Tenta tirar um objeto inativo da pool. Se não houver nenhum inativo:
-    /// – Se allowExpand==false, retorna null.
-    /// – Se allowExpand==true, faz Instantiate(prefab) extra e o adiciona na pool antes de retornar.
-    /// </summary>
     public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation, bool allowExpand = false)
     {
         if (!poolDictionary.ContainsKey(tag))

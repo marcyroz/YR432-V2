@@ -22,18 +22,12 @@ public class RBCBehavior : MonoBehaviour
         rend.sprite = originalSprite;
     }
 
-    /// <summary>
-    /// Chame para marcar visualmente este RBC como infectado.
-    /// </summary>
     public void Infect()
     {
         if (infectedSprite != null)
             rend.sprite = infectedSprite;
     }
 
-    /// <summary>
-    /// (Opcional) Caso queira resetar o sprite mais tarde:
-    /// </summary>
     public void ResetSprite()
     {
         rend.sprite = originalSprite;
