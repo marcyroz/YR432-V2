@@ -95,9 +95,7 @@ public class GameCollisionManager : MonoBehaviour
     }
 
 
-    // ============================================================
     //            1) Lógica de dano (WBC → Vírus)
-    // ============================================================
     private void ProcessDamageTicks()
     {
         var keys = new List<DamagePair>(contactTimers.Keys);
@@ -168,9 +166,7 @@ public class GameCollisionManager : MonoBehaviour
     }
 
 
-    // ==============================================
     // 2) Lógica de infecção (Vírus → RBC)
-    // ==============================================
     private void ProcessInfectionTicks()
     {
         // Pegamos todos os pares atuais de “vírus→rbc” que estão drenando vida
@@ -248,10 +244,8 @@ public class GameCollisionManager : MonoBehaviour
 
 
 
-    // ------------------------------------------------------------
     //    Infecta o RBC (quando atingir 0 de vida), sem alterar
     //    o ScriptableObject original (para não macular futuros spawns)
-    // ------------------------------------------------------------
     private void InfectRBC(GameObject rbcObj)
     {
         var cellScript = rbcObj.GetComponent<CellScript>();
