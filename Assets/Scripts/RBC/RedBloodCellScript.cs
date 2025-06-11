@@ -7,6 +7,5 @@ public class RedBloodCellScript : CellScript
     // protected override void Start()
     // {
     //     base.Start(); // importa os valores do CellData
-    //     // pode fazer lógica adicional aqui, como checar infecção etc.
     // }
 }
