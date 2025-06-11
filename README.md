@@ -15,6 +15,8 @@ Gerencie medicações, combata a infecção e tome decisões que podem levar à 
 ![unknown_2025 06 06-14 03_1](https://github.com/user-attachments/assets/613df5f5-a13d-465b-a956-a213b4503b99)
 
 ---
+## 🎮 Acesse agora a aba [Releases](https://github.com/marcyroz/YR432-V2/releases) para baixar a ultima versão do jogo!
+---
 
 ## 🧠 Conceito
 
@@ -30,11 +32,11 @@ Gerencie medicações, combata a infecção e tome decisões que podem levar à 
 - unity hub 3.12.1
 - unity 6.0 LTS
   
-- [Download](https://unity.com/releases/unity-6)
+- [Download Unity](https://unity.com/releases/unity-6)
 
 ---
 
-## 🚀 Instalação e Importação
+## 🚀 Instalação e Importação (Contribuições para o Desenvolvimento)
 
 ### 1. Clonar o repositório
 
